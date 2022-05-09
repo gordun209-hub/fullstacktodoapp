@@ -1,0 +1,19 @@
+name: Lint And Format
+on:
+  push:
+    branches:
+      - master
+jobs:
+  simple-lint-and-refactor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: yarn install
+        run: yarn
+      - name: lint
+        run: yarn eslint .
+      - name: format
+        run: yarn format
