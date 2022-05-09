@@ -2,28 +2,15 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useQuery } from 'react-query'
 
+import { GetTodosQuery, GetUsersQuery } from '../services/api'
+
 const Home: NextPage = () => {
-	const { data: todos, isLoading } = useQuery('todos', () =>
-		fetch('http://localhost:3000/api/todos', {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		}).then(res => res.json())
+	const { data: todos, isLoading: isLoadingTodos } = useQuery('todos', () =>
+		GetTodosQuery()
 	)
-	const { data: users, isLoading: isLoadingusers } = useQuery('users', () =>
-		fetch('http://localhost:3000/api/users', {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		}).then(res => res.json())
-	)
+
 	if (todos) {
 		console.log(todos)
-	}
-	if (users) {
-		console.log(users)
 	}
 	return (
 		<div>
