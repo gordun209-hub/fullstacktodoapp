@@ -1,0 +1,12 @@
+node-modules/
+jest.config.js
+coverage/
+dist/
+public/
+__mocks__/
+jest.config.ts
+postcss.config.js
+*.d.ts
+tailwind.config.js
+next.config.js
+jest.setup.js
