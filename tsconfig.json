@@ -23,7 +23,8 @@
 			"@/types/*": ["types/*"],
 			"@/app/*": ["app/*"],
 			"@/features/*": ["features/*"],
-			"@/services/*": ["services/*"]
+			"@/services/*": ["services/*"],
+			"@/lib/*": ["lib/*"]
 		}
 	},
 	"include": [
