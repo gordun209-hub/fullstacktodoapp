@@ -1,7 +1,8 @@
+import { Box } from '@mui/material'
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
 
-import Login from '@/components/Login'
+import Login from '@/components/LoginPage/Login'
 import { getUserQuery } from '@/services/api'
 
 const LoginPage: () => JSX.Element = () => {
@@ -13,9 +14,9 @@ const LoginPage: () => JSX.Element = () => {
 		router.push('/signup')
 	}
 	return (
-		<div>
+		<Box>
 			<Login />
-		</div>
+		</Box>
 	)
 }
 export default LoginPage
