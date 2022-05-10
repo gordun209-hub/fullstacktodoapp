@@ -1,17 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useQuery } from 'react-query'
-
-import { GetTodosQuery, GetUsersQuery } from '../services/api'
 
 const Home: NextPage = () => {
-	const { data: todos, isLoading: isLoadingTodos } = useQuery('todos', () =>
-		GetTodosQuery()
-	)
-
-	if (todos) {
-		console.log(todos)
-	}
 	return (
 		<div>
 			<Head>

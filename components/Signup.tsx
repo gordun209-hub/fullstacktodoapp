@@ -4,13 +4,14 @@ import type { ChangeEvent, FC, SyntheticEvent } from 'react'
 import { useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 
-import { loginQuery } from '@/services/api'
+import { signupQuery } from '@/services/api'
 
-const Login: FC = () => {
+const Signup: FC = () => {
 	const queryClient = useQueryClient()
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-	const mutation = useMutation('user', () => loginQuery({ email, password }), {
+	const [isLoading, setIsLoading] = useState(false)
+	const mutation = useMutation(() => signupQuery({ email, password }), {
 		onSuccess: () => {
 			queryClient.invalidateQueries('user')
 		}
@@ -18,7 +19,9 @@ const Login: FC = () => {
 	const router = useRouter()
 	const handleSubmit: (e: SyntheticEvent) => Promise<void> = async e => {
 		e.preventDefault()
+		setIsLoading(true)
 		mutation.mutate()
+		setIsLoading(false)
 		router.push('/')
 	}
 	return (
@@ -54,8 +57,9 @@ const Login: FC = () => {
 								}
 							}}
 							bg='green.500'
+							isLoading={isLoading}
 						>
-							Login
+							Sign up
 						</Button>
 					</form>
 				</Box>
@@ -64,4 +68,4 @@ const Login: FC = () => {
 	)
 }
 
-export default Login
+export default Signup

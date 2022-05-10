@@ -13,12 +13,17 @@
 		"format": "prettier --write '**/*.{ts,tsx,js,jsx,json,md,mdx}'"
 	},
 	"dependencies": {
+		"@chakra-ui/react": "^1.8.8",
+		"@emotion/react": "^11",
+		"@emotion/styled": "^11",
 		"@next-auth/prisma-adapter": "^1.0.3",
 		"@prisma/client": "^3.13.0",
 		"@types/bcrypt": "^5.0.0",
 		"@types/cookie": "^0.5.1",
 		"@types/jsonwebtoken": "^8.5.8",
+		"axios": "^0.27.2",
 		"bcrypt": "^5.0.1",
+		"framer-motion": "^6",
 		"jsonwebtoken": "^8.5.1",
 		"next": "12.1.5",
 		"next-auth": "^4.3.4",
