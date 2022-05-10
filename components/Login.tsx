@@ -22,7 +22,7 @@ const Login: FC = () => {
 	}
 	return (
 		<div>
-			<div></div>
+			<div />
 			<div>
 				<div>
 					<form onSubmit={handleSubmit}>

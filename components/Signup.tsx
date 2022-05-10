@@ -25,7 +25,7 @@ const Signup: FC = () => {
 	}
 	return (
 		<div>
-			<div></div>
+			<div />
 			<div>
 				<div>
 					<form onSubmit={handleSubmit}>

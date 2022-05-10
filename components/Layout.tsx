@@ -10,7 +10,7 @@ const Layout: () => JSX.Element = () => {
 		getUserQuery()
 	)
 	if (isLoadingUser) {
-		return <div></div>
+		return <div />
 	}
 	return (
 		<div>
