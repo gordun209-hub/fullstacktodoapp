@@ -1,9 +1,10 @@
 {
 	"compilerOptions": {
-		"target": "ESNext",
+		"target": "es5",
 		"lib": ["es5", "dom"],
 		"types": ["cypress", "@testing-library/cypress", "node"],
 		"moduleResolution": "Node"
-	},
-	"include": ["**/*.ts", "**/*.ts", "plugins/index.js"]
-}
+ 	}, 
+   
+} 
+   
