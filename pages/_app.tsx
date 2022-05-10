@@ -1,39 +1,46 @@
-import '../styles/globals.css'
-
-import { ChakraProvider } from '@chakra-ui/provider'
-import { extendTheme } from '@chakra-ui/react'
-import type { AppProps } from 'next/app'
-import type { FC } from 'react'
-import React from 'react'
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable react/hook-use-state */
+import { CacheProvider } from '@emotion/react'
+import CssBaseline from '@mui/material/CssBaseline'
+import { ThemeProvider } from '@mui/material/styles'
+import Head from 'next/head'
+import { useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
 import Layout from '@/components/Layout'
 
-// 2. Extend the theme to include custom colors, fonts, etc
-const colors = {
-	brand: {
-		900: '#1a365d',
-		800: '#153e75',
-		700: '#2a69ac'
-	}
-}
+import createEmotionCache from '../src/createEmotionCache'
+import theme from '../src/theme'
 
-const theme = extendTheme({ colors })
+const clientSideEmotionCache = createEmotionCache()
 
-const MyApp: FC<AppProps> = ({ Component, pageProps: { ...pageProps } }) => {
-	// eslint-disable-next-line react/hook-use-state
-	const [queryClient] = React.useState(() => new QueryClient())
+//@ts-ignore
+export default function App(props) {
+	const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
+
+	const [queryClient] = useState(() => new QueryClient())
 
 	return (
-		<QueryClientProvider client={queryClient}>
-			<ChakraProvider theme={theme}>
-				<Layout />
-				<Component {...pageProps} />
-				<ReactQueryDevtools />
-			</ChakraProvider>
-		</QueryClientProvider>
+		<CacheProvider value={emotionCache}>
+			<Head>
+				<title>Mantine next example</title>
+				<meta
+					name='viewport'
+					content='minimum-scale=1, initial-scale=1, width=device-width'
+				/>
+				<link rel='shortcut icon' href='/favicon.svg' />
+			</Head>
+			<ThemeProvider theme={theme}>
+				<CssBaseline />
+				<QueryClientProvider client={queryClient}>
+					<Layout />
+					<Component {...pageProps} />
+					<ReactQueryDevtools />
+				</QueryClientProvider>
+			</ThemeProvider>
+		</CacheProvider>
 	)
 }
-
-export default MyApp

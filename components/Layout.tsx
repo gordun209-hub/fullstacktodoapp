@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import NextLink from 'next/link'
 import { useQuery } from 'react-query'
 
 import { getUserQuery } from '@/services/api'
@@ -10,34 +10,35 @@ const Layout: () => JSX.Element = () => {
 		getUserQuery()
 	)
 	if (isLoadingUser) {
-		return <div></div>
+		return <div />
 	}
 	return (
-		<nav>
+		<div>
 			<ul>
 				<li>
-					<Link href='/'>
+					<NextLink href='/'>
 						<a>Home</a>
-					</Link>
+					</NextLink>
 				</li>
 			</ul>
 			{user?.id && !isLoadingUser ? (
 				<div>
-					<h1>Hello, {user.name}</h1>
 					<LogOutButton />
 				</div>
 			) : (
 				<div>
-					<h1>Hello, guest</h1>
-					<Link href='/signin'>
-						<a>signin</a>
-					</Link>
-					<Link href='/signup'>
-						<a>signup</a>
-					</Link>
+					<div>Hello, guest</div>
+					<div>
+						<NextLink passHref href='/signin'>
+							<a>signin</a>
+						</NextLink>
+						<NextLink passHref href='/signup'>
+							<a>signup</a>
+						</NextLink>
+					</div>
 				</div>
 			)}
-		</nav>
+		</div>
 	)
 }
 export default Layout
