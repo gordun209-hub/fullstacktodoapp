@@ -12,7 +12,7 @@ import { useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
-import TodoLayout from '@/layouts/TodoLayout'
+import { TodoLayout } from '@/components/index'
 
 import createEmotionCache from '../src/createEmotionCache'
 import theme from '../src/theme'
