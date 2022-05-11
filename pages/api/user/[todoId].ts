@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import prisma from '@/lib/prisma'
@@ -25,31 +26,39 @@ const handler: (
 	// @desc   Create a todo
 	// @route  POST /api/user/[todoId]
 	// @access Private
-
 	// IN PROGRESS
+	if (req.method === 'POST') {
+		// Info that would be retrived from the user
+		const { title, priority, completed } = req.body
 
-	// if (req.method === 'POST') {
-	// 	const { priority, title, completed, user } = req.body
+		// cookie and token
+		const cookie = req.cookies
+		const token = jwt.verify(cookie.ACCESS_TOKEN, 'hello')
 
-	// 	try {
-	// 		const todos = await prisma.todo.create({
-	// 			data: {
-	// 				priority,
-	// 				title,
-	// 				completed,
-	// 				user: {
-	// 					connect: {
-	// 						id: String(user.id)
-	// 					}
-	// 				}
-	// 			}
-	// 		})
-	// 		console.log(todos)
-	// 		res.status(202).json({ message: 'submitted successful' })
-	// 	} catch (error) {
-	// 		res.status(500).json({ message: 'error' })
-	// 	}
-	// }
+		if (!req.cookies.ACCESS_TOKEN) {
+			return res.status(500).json({ message: 'error' })
+		}
+
+		console.log(token.id)
+
+		try {
+			const todo = prisma.todo.create({
+				data: {
+					title,
+					priority,
+					completed,
+					userId: {
+						connect: {
+							id: token.id
+						}
+					}
+				}
+			})
+			res.status(202).json({ message: 'submitted successfully' })
+		} catch (error) {
+			res.status(500).json({ message: 'error happened' })
+		}
+	}
 }
 
 export default handler
