@@ -2,6 +2,8 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable react/hook-use-state */
+import '../styles/globals.css'
+
 import { CacheProvider } from '@emotion/react'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
@@ -10,7 +12,7 @@ import { useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
-import Layout from '@/components/Layout'
+import TodoLayout from '@/components/layouts/TodoLayout'
 
 import createEmotionCache from '../src/createEmotionCache'
 import theme from '../src/theme'
@@ -20,8 +22,10 @@ const clientSideEmotionCache = createEmotionCache()
 //@ts-ignore
 export default function App(props) {
 	const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
-
 	const [queryClient] = useState(() => new QueryClient())
+	const getLayout =
+		//@ts-ignore
+		Component.getLayout || ((page: unknown) => <TodoLayout>{page}</TodoLayout>)
 
 	return (
 		<CacheProvider value={emotionCache}>
@@ -36,8 +40,7 @@ export default function App(props) {
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
 				<QueryClientProvider client={queryClient}>
-					<Layout />
-					<Component {...pageProps} />
+					{getLayout(<Component {...pageProps} />)}
 					<ReactQueryDevtools />
 				</QueryClientProvider>
 			</ThemeProvider>
