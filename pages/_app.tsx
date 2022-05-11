@@ -10,7 +10,7 @@ import { useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
-import MainLayout from '@/layouts/MainLayout'
+import TodoLayout from '@/layouts/TodoLayout'
 
 import createEmotionCache from '../src/createEmotionCache'
 import theme from '../src/theme'
@@ -23,7 +23,7 @@ export default function App(props) {
 	const [queryClient] = useState(() => new QueryClient())
 	const getLayout =
 		//@ts-ignore
-		Component.getLayout || ((page: unknown) => <MainLayout>{page}</MainLayout>)
+		Component.getLayout || ((page: unknown) => <TodoLayout>{page}</TodoLayout>)
 
 	return (
 		<CacheProvider value={emotionCache}>
