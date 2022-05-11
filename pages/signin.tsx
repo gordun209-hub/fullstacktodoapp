@@ -17,12 +17,7 @@ const SignIn: {
 } = () => {
 	return (
 		<div>
-			<Box
-				sx={{
-					display: 'flex',
-					height: '100vh'
-				}}
-			>
+			<Box className='h-screen flex'>
 				<MainHero path='/auth.jpg' />
 				<MainContent>
 					<ThemeProvider theme={theme}>
