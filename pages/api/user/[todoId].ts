@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import jwt from 'jsonwebtoken'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
@@ -39,24 +40,25 @@ const handler: (
 			return res.status(500).json({ message: 'error' })
 		}
 
-		console.log(token.id)
+		console.log(cookie)
 
 		try {
-			const todo = prisma.todo.create({
+			await prisma.todo.create({
 				data: {
 					title,
 					priority,
 					completed,
-					userId: {
+					updatedAt: new Date(),
+					user: {
 						connect: {
-							id: token.id
+							id: token?.id
 						}
 					}
 				}
 			})
 			res.status(202).json({ message: 'submitted successfully' })
 		} catch (error) {
-			res.status(500).json({ message: 'error happened' })
+			res.status(400).json({ message: error })
 		}
 	}
 }
