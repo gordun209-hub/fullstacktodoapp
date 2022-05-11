@@ -1,8 +1,13 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Box, Button, Typography } from '@mui/material'
 import Link from 'next/link'
 import React from 'react'
 
+import useUser from '@/utils/useUser'
+
 const HomeContent: () => JSX.Element = () => {
+	const { user } = useUser()
+	const route = user?.id ? '/user' : '/signup'
 	return (
 		<Box>
 			<Typography variant='h2'>Todo App</Typography>
@@ -39,7 +44,7 @@ const HomeContent: () => JSX.Element = () => {
 					variant='contained'
 					color='secondary'
 				>
-					<Link href='/signup'>
+					<Link href={`${route}`}>
 						<a
 							style={{
 								textDecoration: 'none',

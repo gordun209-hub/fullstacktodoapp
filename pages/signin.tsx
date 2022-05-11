@@ -1,16 +1,20 @@
 import { Box } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import type { NextPageWithLayout } from 'next'
 import type { ReactNode } from 'react'
 
-import { SigninForm } from '@/components/index'
-import MainContent from '@/components/MainContent'
-import MainHero from '@/components/MainHero'
-import MainLayout from '@/layouts/MainLayout'
+import {
+	MainContent,
+	MainHero,
+	MainLayout,
+	SigninForm
+} from '@/components/index'
 
 const theme = createTheme()
 
-const SignIn: NextPageWithLayout = () => {
+const SignIn: {
+	(): JSX.Element
+	getLayout(page: ReactNode): JSX.Element
+} = () => {
 	return (
 		<div>
 			<Box

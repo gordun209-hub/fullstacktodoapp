@@ -1,15 +1,19 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Box } from '@mui/material'
-import type { NextPageWithLayout } from 'next'
 import Head from 'next/head'
 import type { ReactNode } from 'react'
 
-import HomeContent from '@/components/HomeContent'
-import MainContent from '@/components/MainContent'
-import MainHero from '@/components/MainHero'
-import MainLayout from '@/layouts/MainLayout'
+import {
+	HomeContent,
+	MainContent,
+	MainHero,
+	MainLayout
+} from '@/components/index'
 
-const Home: NextPageWithLayout = () => {
+const Home: {
+	(): JSX.Element
+	getLayout(page: ReactNode): JSX.Element
+} = () => {
 	return (
 		<div>
 			<Head>
@@ -35,4 +39,4 @@ const Home: NextPageWithLayout = () => {
 
 export default Home
 
-Home.getLayout = (page: ReactNode) => <MainLayout>{page}</MainLayout>
+Home.getLayout = page => <MainLayout>{page}</MainLayout>

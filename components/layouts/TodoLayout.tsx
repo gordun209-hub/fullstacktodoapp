@@ -1,8 +1,7 @@
 import type { FC } from 'react'
 import React from 'react'
 
-import Navbar from '@/components/Navbar'
-import Sidebar from '@/components/Sidebar'
+import { Navbar, Sidebar } from '@/components/index'
 
 type Props = {
 	children: React.ReactNode

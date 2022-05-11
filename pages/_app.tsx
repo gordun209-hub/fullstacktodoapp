@@ -2,6 +2,8 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable react/hook-use-state */
+import '../styles/globals.css'
+
 import { CacheProvider } from '@emotion/react'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
