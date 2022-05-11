@@ -29,6 +29,7 @@ const SigninForm: () => JSX.Element = () => {
 			{ email, password },
 			{
 				onError: err => {
+					// eslint-disable-next-line no-console
 					console.log(err)
 				},
 				onSuccess: () => {

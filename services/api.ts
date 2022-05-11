@@ -24,7 +24,7 @@ const signupQuery: ({
 }: {
 	email: string
 	password: string
-}) => Promise<any> = async ({ email, password }) => {
+}) => Promise<User> = async ({ email, password }) => {
 	const res = await fetch(`${baseUrl}/api/signup`, {
 		method: 'POST',
 		headers: {
@@ -44,7 +44,7 @@ const loginQuery: ({
 }: {
 	email: string | null
 	password: string | null
-}) => Promise<any> = async ({ email, password }) => {
+}) => Promise<User> = async ({ email, password }) => {
 	const res = await fetch(`${baseUrl}/api/signin`, {
 		method: 'POST',
 		headers: {
@@ -58,7 +58,7 @@ const loginQuery: ({
 	const data = await res.json()
 	return data
 }
-const logOutQuery: () => Promise<any> = async () => {
+const logOutQuery: () => Promise<void> = async () => {
 	const res = await fetch(`${baseUrl}/api/logout`, {
 		method: 'POST',
 		headers: {

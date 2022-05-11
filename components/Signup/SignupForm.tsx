@@ -8,7 +8,6 @@ import {
 	TextField
 } from '@mui/material'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from 'react-query'
@@ -18,7 +17,7 @@ import type { FormValues } from '@/types/form'
 import useUser from '@/utils/useUser'
 
 const SignupForm: () => JSX.Element = () => {
-	const { mutate, error, isLoading } = useMutation(signupQuery, {
+	const { mutate } = useMutation(signupQuery, {
 		onSuccess: () => {
 			queryClient.invalidateQueries('user')
 		}
@@ -31,6 +30,7 @@ const SignupForm: () => JSX.Element = () => {
 	const onSubmit: SubmitHandler<FormValues> = ({ email, password }) => {
 		mutate({ email, password })
 	}
+
 	const queryClient = useQueryClient()
 	const { user } = useUser()
 	const router = useRouter()
@@ -55,6 +55,7 @@ const SignupForm: () => JSX.Element = () => {
 						name='email'
 						autoComplete='email'
 					/>
+					{errors.email && <p>please enter a valid email address</p>}
 				</Grid>
 				<Grid item xs={12}>
 					<TextField
@@ -66,6 +67,7 @@ const SignupForm: () => JSX.Element = () => {
 						id='password'
 						autoComplete='new-password'
 					/>
+					{errors.password && <p> password min length 8 </p>}
 				</Grid>
 				<Grid item xs={12}>
 					<FormControlLabel
@@ -78,6 +80,7 @@ const SignupForm: () => JSX.Element = () => {
 			<Button fullWidth type='submit' variant='contained' sx={{ mt: 3, mb: 2 }}>
 				Sign Up
 			</Button>
+
 			<Grid container justifyContent='flex-end'>
 				<Grid item>
 					<Link href='signin' variant='body2'>
