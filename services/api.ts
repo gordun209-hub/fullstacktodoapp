@@ -42,8 +42,8 @@ const loginQuery: ({
 	email,
 	password
 }: {
-	email: string
-	password: string
+	email: string | null
+	password: string | null
 }) => Promise<any> = async ({ email, password }) => {
 	const res = await fetch(`${baseUrl}/api/signin`, {
 		method: 'POST',

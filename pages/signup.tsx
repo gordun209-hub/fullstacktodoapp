@@ -1,19 +1,33 @@
-import { useRouter } from 'next/router'
-import { useQuery } from 'react-query'
+import Box from '@mui/material/Box'
+import Container from '@mui/material/Container'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import Typography from '@mui/material/Typography'
 
-import Signup from '@/components/Signup'
-import { getUserQuery } from '@/services/api'
+import { AvatarComponent, SignupForm } from '@/components/index'
 
-const SignupPage: () => JSX.Element = () => {
-	const router = useRouter()
-	const { data: user, isLoading: isLoadingUser } = useQuery('user', () =>
-		getUserQuery()
-	)
+const theme = createTheme()
 
+const SignUp: () => JSX.Element = () => {
 	return (
-		<div>
-			<Signup />
-		</div>
+		<ThemeProvider theme={theme}>
+			<Container component='main' maxWidth='xs'>
+				<Box
+					sx={{
+						marginTop: 8,
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'center'
+					}}
+				>
+					<AvatarComponent />
+					<Typography component='h1' variant='h5'>
+						Sign up
+					</Typography>
+					<SignupForm />
+				</Box>
+			</Container>
+		</ThemeProvider>
 	)
 }
-export default SignupPage
+
+export default SignUp
