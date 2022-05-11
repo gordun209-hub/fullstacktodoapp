@@ -9,13 +9,10 @@ import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from 'react-query'
 
-
-import Login from '@/components/Login'
 import MainContent from '@/components/MainContent'
 import MainHero from '@/components/MainHero'
-import { getUserQuery } from '@/services/api'
-import { SigninForm } from '@/components/index'
 import { loginQuery } from '@/services/api'
+import { SigninForm } from '@/components/index'
 import type { FormValues } from '@/types/form'
 
 const theme = createTheme()
@@ -26,6 +23,7 @@ const SignInSide: () => JSX.Element = () => {
 		handleSubmit,
 		formState: { errors }
 	} = useForm<FormValues>()
+
 	const onSubmit: SubmitHandler<FormValues> = ({ email, password }) => {
 		mutate(
 			{ email, password },
@@ -46,8 +44,7 @@ const SignInSide: () => JSX.Element = () => {
 
 	const router = useRouter()
 	return (
-
-        	<div>
+		<div>
 			<Box
 				sx={{
 					display: 'flex',
@@ -56,40 +53,16 @@ const SignInSide: () => JSX.Element = () => {
 			>
 				<MainHero path='/auth.jpg' />
 				<MainContent>
-		<ThemeProvider theme={theme}>
-			<Grid container component='main' sx={{ height: '100vh' }}>
-				<Grid
-					item
-					xs={false}
-					sm={4}
-					md={7}
-					sx={{
-						backgroundImage: 'url(https://source.unsplash.com/random)',
-						backgroundRepeat: 'no-repeat',
-						backgroundColor: t =>
-							t.palette.mode === 'light'
-								? t.palette.grey[50]
-								: t.palette.grey[900],
-						backgroundSize: 'cover',
-						backgroundPosition: 'center'
-					}}
-				/>
-				<Grid item square xs={12} sm={8} md={5} component={Paper} elevation={6}>
-					{
+					<ThemeProvider theme={theme}>
 						<SigninForm
-							handleSubmit={handleSubmit}
-							register={register}
 							errors={errors}
-							onSubmit={onSubmit}
+							register={register}
+							handleSubmit={() => onSubmit('test', 'test')}
 						/>
-					}
-				</Grid>
-			</Grid>
-		</ThemeProvider>
-          	</MainContent>
+					</ThemeProvider>
+				</MainContent>
 			</Box>
 		</div>
-
 	)
 }
 export default SignInSide
