@@ -3,7 +3,7 @@ import { Box, Button, Typography } from '@mui/material'
 import Link from 'next/link'
 import React from 'react'
 
-import useUser from '@/utils/useUser'
+import useUser from '../../hooks/useUser'
 
 const HomeContent: () => JSX.Element = () => {
 	const { user } = useUser()
@@ -44,6 +44,7 @@ const HomeContent: () => JSX.Element = () => {
 					variant='contained'
 					color='secondary'
 				>
+					{user?.id}aa
 					<Link href={`${route}`}>
 						<a
 							style={{

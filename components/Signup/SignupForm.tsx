@@ -12,7 +12,8 @@ import { useMutation, useQueryClient } from 'react-query'
 
 import { signupQuery } from '@/services/api'
 import type { FormValues } from '@/types/form'
-import useUser from '@/utils/useUser'
+
+import useUser from '../../hooks/useUser'
 
 const SignupForm: () => JSX.Element = () => {
 	const { mutate } = useMutation(signupQuery, {
