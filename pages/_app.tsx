@@ -36,7 +36,7 @@ export default function App(props) {
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
 				<QueryClientProvider client={queryClient}>
-					<Layout />
+					{/* <Layout /> */}
 					<Component {...pageProps} />
 					<ReactQueryDevtools />
 				</QueryClientProvider>
