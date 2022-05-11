@@ -8,12 +8,14 @@ import {
 	TextField
 } from '@mui/material'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from 'react-query'
 
 import { signupQuery } from '@/services/api'
 import type { FormValues } from '@/types/form'
+import useUser from '@/utils/useUser'
 
 const SignupForm: () => JSX.Element = () => {
 	const { mutate, error, isLoading } = useMutation(signupQuery, {
@@ -28,11 +30,13 @@ const SignupForm: () => JSX.Element = () => {
 	} = useForm<FormValues>()
 	const onSubmit: SubmitHandler<FormValues> = ({ email, password }) => {
 		mutate({ email, password })
-		router.push('/')
 	}
 	const queryClient = useQueryClient()
-
+	const { user } = useUser()
 	const router = useRouter()
+	if (user?.id) {
+		router.push('/')
+	}
 	return (
 		<Box
 			noValidate
@@ -57,12 +61,11 @@ const SignupForm: () => JSX.Element = () => {
 						required
 						fullWidth
 						label='Password'
-						{...register('password', { required: true })}
+						{...register('password', { required: true, minLength: 8 })}
 						type='password'
 						id='password'
 						autoComplete='new-password'
 					/>
-					{}
 				</Grid>
 				<Grid item xs={12}>
 					<FormControlLabel
