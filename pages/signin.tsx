@@ -1,7 +1,10 @@
+import { Box } from '@mui/material'
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
 
 import Login from '@/components/Login'
+import MainContent from '@/components/MainContent'
+import MainHero from '@/components/MainHero'
 import { getUserQuery } from '@/services/api'
 
 const LoginPage: () => JSX.Element = () => {
@@ -14,7 +17,17 @@ const LoginPage: () => JSX.Element = () => {
 	}
 	return (
 		<div>
-			<Login />
+			<Box
+				sx={{
+					display: 'flex',
+					height: '100vh'
+				}}
+			>
+				<MainHero path='/auth.jpg' />
+				<MainContent>
+					<Login />
+				</MainContent>
+			</Box>
 		</div>
 	)
 }
