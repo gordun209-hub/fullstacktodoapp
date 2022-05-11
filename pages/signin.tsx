@@ -1,11 +1,19 @@
+import { Box } from '@mui/material'
+
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+
 import { useRouter } from 'next/router'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from 'react-query'
 
+
+import Login from '@/components/Login'
+import MainContent from '@/components/MainContent'
+import MainHero from '@/components/MainHero'
+import { getUserQuery } from '@/services/api'
 import { SigninForm } from '@/components/index'
 import { loginQuery } from '@/services/api'
 import type { FormValues } from '@/types/form'
@@ -38,6 +46,16 @@ const SignInSide: () => JSX.Element = () => {
 
 	const router = useRouter()
 	return (
+
+        	<div>
+			<Box
+				sx={{
+					display: 'flex',
+					height: '100vh'
+				}}
+			>
+				<MainHero path='/auth.jpg' />
+				<MainContent>
 		<ThemeProvider theme={theme}>
 			<Grid container component='main' sx={{ height: '100vh' }}>
 				<Grid
@@ -68,6 +86,10 @@ const SignInSide: () => JSX.Element = () => {
 				</Grid>
 			</Grid>
 		</ThemeProvider>
+          	</MainContent>
+			</Box>
+		</div>
+
 	)
 }
 export default SignInSide
