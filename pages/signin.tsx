@@ -9,8 +9,6 @@ import {
 	SigninForm
 } from '@/components/index'
 
-const theme = createTheme()
-
 const SignIn: {
 	(): JSX.Element
 	getLayout(page: ReactNode): JSX.Element
@@ -25,9 +23,7 @@ const SignIn: {
 			>
 				<MainHero path='/auth.jpg' />
 				<MainContent>
-					<ThemeProvider theme={theme}>
-						<SigninForm />
-					</ThemeProvider>
+					<SigninForm />
 				</MainContent>
 			</Box>
 		</div>

@@ -11,12 +11,15 @@ const customJestConfig = {
 	moduleNameMapper: {
 		// Handle module aliases (this will be automatically configured for you soon)
 		'^@/components/(.*)$': '<rootDir>/components/$1',
-
+		'^@/layouts/(.*)$': '<rootDir>/layouts/$1',
 		'^@/pages/(.*)$': '<rootDir>/pages/$1',
+		'^@/utils/(.*)$': '<rootDir>/utils/$1',
+		'^@/lib/(.*)$': '<rootDir>/lib/$1',
 		'^@/utils/(.*)$': '<rootDir>/utils/$1',
 		'^@/app/(.*)$': '<rootDir>/app/$1',
 		'^@/features/(.*)$': '<rootDir>/features/$1',
-		'^@/services/(.*)$': '<rootDir>/services/$1'
+		'^@/services/(.*)$': '<rootDir>/services/$1',
+		'^@/styles/(.*)$': '<rootDir>/styles/$1'
 	},
 	testEnvironment: 'jest-environment-jsdom',
 	testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/cypress']
