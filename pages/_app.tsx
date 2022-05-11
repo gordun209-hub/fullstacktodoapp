@@ -21,8 +21,8 @@ const clientSideEmotionCache = createEmotionCache()
 export default function App(props) {
 	const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
 	const [queryClient] = useState(() => new QueryClient())
-
 	const getLayout =
+		//@ts-ignore
 		Component.getLayout || ((page: unknown) => <MainLayout>{page}</MainLayout>)
 
 	return (

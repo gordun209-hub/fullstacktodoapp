@@ -1,18 +1,16 @@
 import { Box } from '@mui/material'
-
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-
 import { useRouter } from 'next/router'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from 'react-query'
 
+import { SigninForm } from '@/components/index'
 import MainContent from '@/components/MainContent'
 import MainHero from '@/components/MainHero'
 import { loginQuery } from '@/services/api'
-import { SigninForm } from '@/components/index'
 import type { FormValues } from '@/types/form'
 
 const theme = createTheme()
@@ -54,11 +52,7 @@ const SignInSide: () => JSX.Element = () => {
 				<MainHero path='/auth.jpg' />
 				<MainContent>
 					<ThemeProvider theme={theme}>
-						<SigninForm
-							errors={errors}
-							register={register}
-							handleSubmit={() => onSubmit('test', 'test')}
-						/>
+						<SigninForm />
 					</ThemeProvider>
 				</MainContent>
 			</Box>

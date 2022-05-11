@@ -8,21 +8,41 @@ import {
 	TextField,
 	Typography
 } from '@mui/material'
+import { useRouter } from 'next/router'
+import type { SubmitHandler } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
+import { useMutation, useQueryClient } from 'react-query'
 
-import type { FormProps } from '@/types/form'
+import { loginQuery } from '@/services/api'
+import type { FormValues } from '@/types/form'
 
 import AvatarComponent from './Avatar'
 
-const SigninForm: ({
-	handleSubmit,
-	register,
-	onSubmit
-}: FormProps) => JSX.Element = ({
-	handleSubmit,
-	register,
-	onSubmit,
-	errors
-}) => {
+const SigninForm: () => JSX.Element = () => {
+	const {
+		register,
+		handleSubmit,
+		formState: { errors }
+	} = useForm<FormValues>()
+	const onSubmit: SubmitHandler<FormValues> = ({ email, password }) => {
+		mutate(
+			{ email, password },
+			{
+				onError: err => {
+					console.log(err)
+				},
+				onSuccess: () => {
+					router.push('/')
+				}
+			}
+		)
+	}
+	const queryClient = useQueryClient()
+	const { mutate } = useMutation(loginQuery, {
+		onSuccess: () => queryClient.invalidateQueries('user')
+	})
+
+	const router = useRouter()
 	return (
 		<Box
 			sx={{
