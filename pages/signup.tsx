@@ -1,3 +1,4 @@
+
 import { Box } from '@mui/material'
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
@@ -7,26 +8,50 @@ import MainHero from '@/components/MainHero'
 import Signup from '@/components/Signup'
 import { getUserQuery } from '@/services/api'
 
-const SignupPage: () => JSX.Element = () => {
-	const router = useRouter()
-	const { data: user, isLoading: isLoadingUser } = useQuery('user', () =>
-		getUserQuery()
-	)
+import Box from '@mui/material/Box'
+import Container from '@mui/material/Container'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import Typography from '@mui/material/Typography'
 
+import { AvatarComponent, SignupForm } from '@/components/index'
+
+
+const theme = createTheme()
+
+const SignUp: () => JSX.Element = () => {
 	return (
-		<div>
+
+        	<div>
 			<Box
 				sx={{
 					display: 'flex',
 					height: '100vh'
 				}}
 			>
-				<MainHero path='/auth.jpg' />
-				<MainContent>
-					<Signup />
-				</MainContent>
+		<ThemeProvider theme={theme}>
+			<Container component='main' maxWidth='xs'>
+				<Box
+					sx={{
+						marginTop: 8,
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'center'
+					}}
+				>
+          <MainHero path='/auth.jpg' />
+					<AvatarComponent />
+					<Typography component='h1' variant='h5'>
+						Sign up
+					</Typography>
+					<SignupForm />
+				</Box>
+			</Container>
+		</ThemeProvider>
+        	</MainContent>
 			</Box>
 		</div>
+
 	)
 }
-export default SignupPage
+
+export default SignUp

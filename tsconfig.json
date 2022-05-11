@@ -32,6 +32,8 @@
 		"next-env.d.ts",
 		"**/*.ts",
 		"**/*.tsx",
+		"**/**/*.tsx",
+		"**/**/.tsx",
 		"types.d.ts",
 		"jest.config.js"
 	],

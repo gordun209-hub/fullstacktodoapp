@@ -10,7 +10,10 @@ import { useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
+
 import MainLayout from '@/layouts/MainLayout'
+
+
 
 import createEmotionCache from '../src/createEmotionCache'
 import theme from '../src/theme'
@@ -38,7 +41,11 @@ export default function App(props) {
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
 				<QueryClientProvider client={queryClient}>
+
 					{getLayout(<Component {...pageProps} />)}
+
+					<Component {...pageProps} />
+
 					<ReactQueryDevtools />
 				</QueryClientProvider>
 			</ThemeProvider>

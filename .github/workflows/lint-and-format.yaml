@@ -1,8 +1,10 @@
 name: Lint And Format
 on:
   push:
+
     branches:
-      - master
+      [master, develop]
+
 jobs:
   simple-lint-and-refactor:
     runs-on: ubuntu-latest
