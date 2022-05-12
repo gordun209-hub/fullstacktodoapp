@@ -9,9 +9,10 @@ import {
 	ListItemIcon,
 	ListItemText
 } from '@mui/material'
+import { nanoid } from 'nanoid'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { v4 as uuid } from 'uuid'
+import React from 'react'
 
 const links = [
 	{
@@ -44,7 +45,7 @@ const SidebarLinks: () => JSX.Element = () => {
 		<List>
 			{links.map(link => (
 				<Link
-					key={uuid()}
+					key={nanoid()}
 					replace
 					passHref
 					href={{

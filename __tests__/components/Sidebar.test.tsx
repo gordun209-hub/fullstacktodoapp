@@ -1,6 +1,13 @@
 import { Sidebar } from '@/components/index'
 import { render, screen } from '@/utils/testUtils'
 
+jest.mock('next/router', () => ({
+	useRouter: jest.fn().mockImplementation(() => ({
+		query: {
+			type: 'inbox'
+		}
+	}))
+}))
 describe('Sidebar', () => {
 	describe('renders properly', () => {
 		test('renders inline components', () => {

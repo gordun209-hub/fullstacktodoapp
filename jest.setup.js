@@ -2,6 +2,10 @@
 // If you delete this file, remove `setupFilesAfterEnv` from `jest.config.js`
 import AbortController from 'abort-controller'
 import { fetch, Headers, Request, Response } from 'cross-fetch'
+let n = 0
+jest.mock('nanoid', () => ({
+	nanoid: () => `${n++}`
+}))
 // Used for __tests__/testing-library.js
 // Learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect'
