@@ -30,20 +30,26 @@ const handler: (
 	// IN PROGRESS
 	if (req.method === 'POST') {
 		// Info that would be retrived from the user
-		const { title, priority, completed } = req.body
+		const {
+			title,
+			priority,
+			completed
+		}: {
+			title: string
+			priority: number
+			completed: boolean
+		} = req.body
 
 		// cookie and token
 		const cookie = req.cookies
-		const token = jwt.verify(cookie.ACCESS_TOKEN, 'hello')
+		const token = jwt.verify(cookie.ACCESS_TOKEN, 'hello') as { id: string }
 
 		if (!req.cookies.ACCESS_TOKEN) {
 			return res.status(500).json({ message: 'error' })
 		}
 
-		console.log(cookie)
-
 		try {
-			await prisma.todo.create({
+			const todo = await prisma.todo.create({
 				data: {
 					title,
 					priority,
@@ -56,7 +62,7 @@ const handler: (
 					}
 				}
 			})
-			res.status(202).json({ message: 'submitted successfully' })
+			res.status(202).json(todo)
 		} catch (error) {
 			res.status(400).json({ message: error })
 		}
