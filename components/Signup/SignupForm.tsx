@@ -1,10 +1,10 @@
+import { Input } from '@mui/material'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Grid from '@mui/material/Grid'
 import Link from '@mui/material/Link'
-import TextField from '@mui/material/TextField'
 import { useRouter } from 'next/router'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
@@ -45,28 +45,44 @@ const SignupForm: () => JSX.Element = () => {
 		>
 			<Grid container spacing={2}>
 				<Grid item xs={12}>
-					<TextField
+					<Input
 						required
 						fullWidth
+						autoFocus
+						aria-invalid={errors.email ? 'true' : 'false'}
+						{...register('email', {
+							required: 'required',
+							pattern: {
+								value: /\S+@\S+\.\S+/,
+								message: 'Entered value does not match email format'
+							}
+						})}
 						id='email'
-						{...register('email', { required: true })}
-						label='Email Address'
+						type='email'
+						placeholder='example@mail.com'
 						name='email'
 						autoComplete='email'
 					/>
-					{errors.email && <p>please enter a valid email address</p>}
+					{errors.email && <span role='alert'>{errors.email.message}</span>}
 				</Grid>
 				<Grid item xs={12}>
-					<TextField
+					<Input
 						required
 						fullWidth
-						label='Password'
-						{...register('password', { required: true, minLength: 8 })}
-						type='password'
+						{...register('password', {
+							required: 'required',
+							minLength: {
+								value: 5,
+								message: 'min length is 5'
+							}
+						})}
 						id='password'
-						autoComplete='new-password'
+						autoComplete='current-password'
+						placeholder='password'
 					/>
-					{errors.password && <p> password min length 8 </p>}
+					{errors.password && (
+						<span role='alert'>{errors.password.message}</span>
+					)}
 				</Grid>
 				<Grid item xs={12}>
 					<FormControlLabel

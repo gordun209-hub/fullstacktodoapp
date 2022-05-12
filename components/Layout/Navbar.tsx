@@ -1,10 +1,7 @@
 import { AppBar, Toolbar, Typography } from '@mui/material'
-import { useRouter } from 'next/router'
 
 const Navbar: () => JSX.Element = () => {
 	const drawerWidth = 240
-	const router = useRouter()
-	const { pathname } = router
 
 	return (
 		<AppBar

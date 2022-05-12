@@ -33,7 +33,7 @@ const SidebarLinks: () => JSX.Element = () => {
 	return (
 		<List>
 			{links.map(link => (
-				<ListItem key={Date.now()} disablePadding>
+				<ListItem key={link.name} disablePadding>
 					<ListItemButton>
 						<ListItemIcon>{link.icon}</ListItemIcon>
 						<ListItemText primary={link.name} />

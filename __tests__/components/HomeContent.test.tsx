@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable react/display-name */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { HomeContent } from '@/components/index'
 import { render, screen, waitFor } from '@/utils/testUtils'
 
