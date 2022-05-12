@@ -5,6 +5,7 @@ const Navbar: () => JSX.Element = () => {
 
 	return (
 		<AppBar
+			className='bg-blue-500 shadow-none'
 			position='fixed'
 			sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
 		>

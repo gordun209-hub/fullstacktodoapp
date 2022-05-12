@@ -1,5 +1,6 @@
 import { Input } from '@mui/material'
 import Box from '@mui/material/Box'
+import { useRouter } from 'next/router'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from 'react-query'
@@ -10,13 +11,26 @@ import type { FormValues } from '@/types/form'
 import FormWrapper from './FormWrapper'
 
 const SigninForm: () => JSX.Element = () => {
+	const router = useRouter()
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors }
 	} = useForm<FormValues>()
 	const onSubmit: SubmitHandler<FormValues> = ({ email, password }) => {
-		mutate({ email, password }, {})
+		mutate(
+			{ email, password },
+			{
+				onError: err => {
+					// eslint-disable-next-line no-console
+					console.log(err)
+				},
+				onSuccess: () => {
+					router.push('/user')
+				}
+			}
+		)
 	}
 	const queryClient = useQueryClient()
 	const { mutate } = useMutation(loginQuery, {
