@@ -59,6 +59,7 @@ const SigninForm: () => JSX.Element = () => {
 					})}
 					id='email'
 					type='email'
+					data-testid='email'
 					placeholder='example@mail.com'
 					name='email'
 					autoComplete='email'
@@ -67,6 +68,7 @@ const SigninForm: () => JSX.Element = () => {
 				<Input
 					required
 					fullWidth
+					data-testid='password'
 					{...register('password', {
 						required: 'required',
 						minLength: {
