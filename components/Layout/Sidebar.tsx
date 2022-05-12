@@ -4,7 +4,7 @@ import Drawer from '@mui/material/Drawer'
 import Toolbar from '@mui/material/Toolbar'
 import { useRouter } from 'next/router'
 import * as React from 'react'
-import { useMutation, useQuery } from 'react-query'
+import { useMutation } from 'react-query'
 
 import { logOutQuery } from '@/services/api'
 
@@ -39,7 +39,6 @@ const Sidebar: () => JSX.Element = () => {
 				}}
 			>
 				Logout
-				{/* !!ADD LOGOUT FUNCTION HERE  */}
 			</Button>
 		</Drawer>
 	)

@@ -27,7 +27,6 @@ const AllProviders: FC<{ children: ReactElement }> = ({ children }) => {
 				<CssBaseline />
 				<QueryClientProvider client={queryClient}>
 					{children}
-					<ReactQueryDevtools />
 				</QueryClientProvider>
 			</ThemeProvider>
 		</>
