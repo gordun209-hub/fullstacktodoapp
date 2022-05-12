@@ -11,19 +11,8 @@ const HomeContent: () => JSX.Element = () => {
 	return (
 		<Box>
 			<Typography variant='h2'>Todo App</Typography>
-			<Box
-				sx={{
-					marginTop: '1rem',
-					padding: '1rem'
-				}}
-			>
-				<Typography
-					sx={{
-						fontSize: '1.05rem',
-						fontWeight: 'light',
-						color: 'text.secondary'
-					}}
-				>
+			<Box className='mt-3 p-2 '>
+				<Typography className='text-lg font-light text-zinc-500'>
 					This is a minimal todo app built with Next.js and Material-UI. Todo
 					app has never been so easy to use. It's super simple to add a new
 					task, mark it as completed, and delete it. If you have any questions
@@ -38,21 +27,12 @@ const HomeContent: () => JSX.Element = () => {
 				</Typography>
 
 				<Button
-					sx={{
-						marginTop: '2rem'
-					}}
+					className='mt-3 bg-green-500'
 					variant='contained'
 					color='secondary'
 				>
 					<Link href={`${route}`}>
-						<a
-							style={{
-								textDecoration: 'none',
-								color: '#fff'
-							}}
-						>
-							Get Started
-						</a>
+						<a>Get Started</a>
 					</Link>
 				</Button>
 			</Box>
