@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 //! Middeware for protection against CSRF attacks
-const signedinPages = ['/admin']
+const signedinPages = ['/user']
 
 export default function middleware(req: NextRequest): NextResponse | undefined {
 	const url = req.nextUrl.clone()

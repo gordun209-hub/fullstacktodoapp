@@ -31,7 +31,6 @@ const HomeContent: () => JSX.Element = () => {
 					variant='contained'
 					color='secondary'
 				>
-					{user?.id}aa
 					<Link href={`${route}`}>
 						<a>Get Started</a>
 					</Link>
