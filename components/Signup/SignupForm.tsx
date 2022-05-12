@@ -5,7 +5,6 @@ import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Grid from '@mui/material/Grid'
 import Link from '@mui/material/Link'
-import Typography from '@mui/material/Typography'
 import { useRouter } from 'next/router'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
@@ -15,7 +14,6 @@ import { signupQuery } from '@/services/api'
 import type { FormValues } from '@/types/form'
 
 import useUser from '../../hooks/useUser'
-import AvatarComponent from '../Signin/Avatar'
 
 const SignupForm: () => JSX.Element = () => {
 	const { mutate } = useMutation(signupQuery, {
@@ -36,20 +34,16 @@ const SignupForm: () => JSX.Element = () => {
 	const { user } = useUser()
 	const router = useRouter()
 	if (user?.id) {
-		router.push('/user')
+		router.push('/')
 	}
 	return (
 		<Box
 			noValidate
 			component='form'
-			className='my-8 mx-4 flex flex-col items-center'
+			sx={{ mt: 3 }}
 			onSubmit={handleSubmit(onSubmit)}
 		>
-			<AvatarComponent />
-			<Typography component='h1' variant='h5'>
-				Sign up
-			</Typography>
-			<Grid container spacing={2} className='mt-1'>
+			<Grid container spacing={2}>
 				<Grid item xs={12}>
 					<Input
 						required
@@ -92,19 +86,13 @@ const SignupForm: () => JSX.Element = () => {
 				</Grid>
 				<Grid item xs={12}>
 					<FormControlLabel
-						className='text-zinc-500'
 						control={<Checkbox value='allowExtraEmails' color='primary' />}
-						label='I agree to the terms and conditions'
+						label='I want to receive inspiration, marketing promotions and updates via email.'
 					/>
 				</Grid>
 			</Grid>
 
-			<Button
-				fullWidth
-				type='submit'
-				variant='contained'
-				className='bg-blue-500 hover:bg-blue-400 mt-3 mb-2'
-			>
+			<Button fullWidth type='submit' variant='contained' sx={{ mt: 3, mb: 2 }}>
 				Sign Up
 			</Button>
 

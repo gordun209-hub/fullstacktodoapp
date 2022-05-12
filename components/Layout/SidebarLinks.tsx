@@ -9,63 +9,36 @@ import {
 	ListItemIcon,
 	ListItemText
 } from '@mui/material'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { v4 as uuid } from 'uuid'
 
 const links = [
 	{
 		name: 'Inbox',
-		icon: <MoveToInboxOutlinedIcon />,
-		query: 'inbox'
+		icon: <MoveToInboxOutlinedIcon />
 	},
 	{
 		name: 'Today',
-		icon: <TodayOutlinedIcon />,
-		query: 'today'
+		icon: <TodayOutlinedIcon />
 	},
 	{
 		name: 'Upcoming',
-		icon: <UpcomingOutlinedIcon />,
-		query: 'upcoming'
+		icon: <UpcomingOutlinedIcon />
 	},
 	{
 		name: 'Completed',
-		icon: <EventAvailableOutlinedIcon />,
-		query: 'completed'
+		icon: <EventAvailableOutlinedIcon />
 	}
 ]
 
 const SidebarLinks: () => JSX.Element = () => {
-	const router = useRouter()
-	const { type } = router.query
-
 	return (
 		<List>
 			{links.map(link => (
-				<Link
-					key={uuid()}
-					replace
-					passHref
-					href={{
-						pathname: '/user/todos',
-						query: { type: link.query }
-					}}
-				>
-					<ListItem
-						disablePadding
-						className={type === link.query ? 'text-blue-500' : ''}
-					>
-						<ListItemButton>
-							<ListItemIcon
-								className={type === link.query ? ' text-blue-500' : ''}
-							>
-								{link.icon}
-							</ListItemIcon>
-							<ListItemText primary={link.name} />
-						</ListItemButton>
-					</ListItem>
-				</Link>
+				<ListItem key={link.name} disablePadding>
+					<ListItemButton>
+						<ListItemIcon>{link.icon}</ListItemIcon>
+						<ListItemText primary={link.name} />
+					</ListItemButton>
+				</ListItem>
 			))}
 		</List>
 	)
