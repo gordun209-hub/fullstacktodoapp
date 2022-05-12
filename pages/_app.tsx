@@ -27,7 +27,7 @@ export default function App(props) {
 		Component.getLayout || ((page: unknown) => <TodoLayout>{page}</TodoLayout>)
 
 	return (
-		<QueryClientProvider client={queryClient}>
+		<>
 			<Head>
 				<title>Mantine next example</title>
 				<meta
@@ -38,9 +38,11 @@ export default function App(props) {
 			</Head>
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
-				{getLayout(<Component {...pageProps} />)}
+				<QueryClientProvider client={queryClient}>
+					{getLayout(<Component {...pageProps} />)}
+					<ReactQueryDevtools />
+				</QueryClientProvider>
 			</ThemeProvider>
-			<ReactQueryDevtools />
-		</QueryClientProvider>
+		</>
 	)
 }

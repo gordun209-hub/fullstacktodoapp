@@ -1,5 +1,5 @@
+import { Input } from '@mui/material'
 import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from 'react-query'
@@ -31,7 +31,7 @@ const SigninForm: () => JSX.Element = () => {
 			onSubmit={handleSubmit(onSubmit)}
 		>
 			<FormWrapper>
-				<TextField
+				<Input
 					required
 					fullWidth
 					autoFocus
@@ -43,22 +43,16 @@ const SigninForm: () => JSX.Element = () => {
 							message: 'Entered value does not match email format'
 						}
 					})}
-					margin='normal'
 					id='email'
 					type='email'
 					placeholder='example@mail.com'
-					label='Email Address'
 					name='email'
 					autoComplete='email'
 				/>
 				{errors.email && <span role='alert'>{errors.email.message}</span>}
-				<TextField
+				<Input
 					required
 					fullWidth
-					margin='normal'
-					label='Password'
-					aria-invalid={errors.password ? 'true' : 'false'}
-					type='password'
 					{...register('password', {
 						required: 'required',
 						minLength: {

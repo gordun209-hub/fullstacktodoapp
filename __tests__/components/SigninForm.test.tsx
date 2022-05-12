@@ -8,9 +8,7 @@ describe('Signin form', () => {
 		it('displays error when empty input', async () => {
 			render(<SigninForm />)
 			userEvent.click(screen.getByRole('button', { name: /sign in/i }))
-			expect(
-				screen.getByText(/Entered value does not match email format/i)
-			).toBeInTheDocument()
+			expect(await screen.findAllByRole('alert')).toHaveLength(2)
 		})
 	})
 })
