@@ -31,7 +31,7 @@ const SigninForm: () => JSX.Element = () => {
 					console.log(err)
 				},
 				onSuccess: () => {
-					router.push('/')
+					router.push('/user')
 				}
 			}
 		)
@@ -43,15 +43,7 @@ const SigninForm: () => JSX.Element = () => {
 
 	const router = useRouter()
 	return (
-		<Box
-			sx={{
-				my: 8,
-				mx: 4,
-				display: 'flex',
-				flexDirection: 'column',
-				alignItems: 'center'
-			}}
-		>
+		<Box className='my-8 mx-4 flex flex-col items-center'>
 			<AvatarComponent />
 			<Typography component='h1' variant='h5'>
 				Sign in
@@ -59,7 +51,7 @@ const SigninForm: () => JSX.Element = () => {
 			<Box
 				noValidate
 				component='form'
-				sx={{ mt: 1 }}
+				className='mt-1'
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<TextField
@@ -89,6 +81,7 @@ const SigninForm: () => JSX.Element = () => {
 					autoComplete='current-password'
 				/>
 				<FormControlLabel
+					className='text-zinc-500'
 					control={<Checkbox value='remember' color='primary' />}
 					label='Remember me'
 				/>
@@ -96,7 +89,7 @@ const SigninForm: () => JSX.Element = () => {
 					fullWidth
 					type='submit'
 					variant='contained'
-					sx={{ mt: 3, mb: 2 }}
+					className='mt-3 mb-2 bg-blue-500 hover:bg-blue-400'
 				>
 					Sign In
 				</Button>

@@ -1,13 +1,11 @@
 import { AppBar, Toolbar, Typography } from '@mui/material'
-import { useRouter } from 'next/router'
 
 const Navbar: () => JSX.Element = () => {
 	const drawerWidth = 240
-	const router = useRouter()
-	const { pathname } = router
 
 	return (
 		<AppBar
+			className='bg-blue-500 shadow-none'
 			position='fixed'
 			sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
 		>
