@@ -15,12 +15,6 @@ const drawerWidth = 240
 const Sidebar: () => JSX.Element = () => {
 	const router = useRouter()
 	const { mutate } = useMutation('user', logOutQuery)
-
-	const handleLogout = (): void => {
-		mutate()
-		router.push('/')
-	}
-
 	return (
 		<Drawer
 			className='shrink-0'
@@ -33,15 +27,16 @@ const Sidebar: () => JSX.Element = () => {
 			variant='permanent'
 			anchor='left'
 		>
-			<Toolbar className='bg-blue-500 text-white text-lg font-black'>
-				TODO APP
-			</Toolbar>
+			<Toolbar>Todo App</Toolbar>
 			<Divider />
 			<SidebarLinks />
 			<Button
-				className='absolute bottom-0 right-0 left-0 rounded-none border-zinc-300'
+				className='absolute bottom-0 right-0 left-0'
 				variant='outlined'
-				onClick={handleLogout}
+				onClick={() => {
+					mutate()
+					router.push('/')
+				}}
 			>
 				Logout
 			</Button>
