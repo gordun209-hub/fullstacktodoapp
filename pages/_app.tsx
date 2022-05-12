@@ -4,7 +4,6 @@
 /* eslint-disable react/hook-use-state */
 import '../styles/globals.css'
 
-import { CacheProvider } from '@emotion/react'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
 import Head from 'next/head'
@@ -21,14 +20,14 @@ const clientSideEmotionCache = createEmotionCache()
 
 //@ts-ignore
 export default function App(props) {
-	const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
+	const { Component = clientSideEmotionCache, pageProps } = props
 	const [queryClient] = useState(() => new QueryClient())
 	const getLayout =
 		//@ts-ignore
 		Component.getLayout || ((page: unknown) => <TodoLayout>{page}</TodoLayout>)
 
 	return (
-		<CacheProvider value={emotionCache}>
+		<QueryClientProvider client={queryClient}>
 			<Head>
 				<title>Mantine next example</title>
 				<meta
@@ -39,11 +38,9 @@ export default function App(props) {
 			</Head>
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
-				<QueryClientProvider client={queryClient}>
-					{getLayout(<Component {...pageProps} />)}
-					<ReactQueryDevtools />
-				</QueryClientProvider>
+				{getLayout(<Component {...pageProps} />)}
 			</ThemeProvider>
-		</CacheProvider>
+			<ReactQueryDevtools />
+		</QueryClientProvider>
 	)
 }

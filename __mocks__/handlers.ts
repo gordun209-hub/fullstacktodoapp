@@ -1,0 +1,13 @@
+// src/mocks/handlers.js
+import { rest } from 'msw'
+
+export const handlers = [
+	rest.get('http://localhost:3000/api/me', (req, res, ctx) => {
+		return res(
+			ctx.status(200),
+			ctx.json({
+				id: 1
+			})
+		)
+	})
+]
