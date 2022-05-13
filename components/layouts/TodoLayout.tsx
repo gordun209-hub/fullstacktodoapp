@@ -13,8 +13,8 @@ const TodoLayout: FC<Props> = ({ children }) => {
 		<div className='flex'>
 			<Navbar />
 			<Sidebar />
-			<Box component='main' className='ml-[240px] bg-white p-6'>
-				<Toolbar />
+			<Box data-cy='main' component='main' className='ml-[240px] bg-white p-6'>
+				<Toolbar data-cy='todo-toolbar' />
 				{children}
 			</Box>
 		</div>

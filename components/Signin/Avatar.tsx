@@ -3,8 +3,8 @@ import { Avatar } from '@mui/material'
 
 const AvatarComponent: () => JSX.Element = () => {
 	return (
-		<Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-			<LockOutlinedIcon />
+		<Avatar data-cy='avatar' sx={{ m: 1, bgcolor: 'secondary.main' }}>
+			<LockOutlinedIcon data-cy='icon' />
 		</Avatar>
 	)
 }

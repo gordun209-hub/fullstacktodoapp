@@ -8,14 +8,19 @@ const useUser: () => {
 	error: unknown
 	isLoading: boolean
 	isSuccess: boolean
+	isError: boolean
 } = () => {
-	const { data, error, isLoading, isSuccess } = useQuery('user', getUserQuery)
+	const { data, error, isLoading, isSuccess, isError } = useQuery(
+		'user',
+		getUserQuery
+	)
 
 	return {
 		user: data,
 		error,
 		isLoading,
-		isSuccess
+		isSuccess,
+		isError
 	}
 }
 

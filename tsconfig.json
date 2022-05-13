@@ -34,6 +34,7 @@
 		"**/*.tsx",
 		"**/**/*.tsx",
 		"**/**/.tsx",
+		"/prisma/seed.ts",
 		"types.d.ts",
 		"jest.config.js"
 	],

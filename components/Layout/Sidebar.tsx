@@ -23,6 +23,7 @@ const Sidebar: () => JSX.Element = () => {
 
 	return (
 		<Drawer
+			data-cy='drawer'
 			className='shrink-0'
 			sx={{
 				'& .MuiDrawer-paper': {
@@ -41,6 +42,7 @@ const Sidebar: () => JSX.Element = () => {
 			<Button
 				className='absolute bottom-0 right-0 left-0 rounded-none border-zinc-300'
 				variant='outlined'
+				data-cy='logout-button'
 				onClick={handleLogout}
 			>
 				Logout
