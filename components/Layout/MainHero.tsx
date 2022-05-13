@@ -9,12 +9,7 @@ type Props = {
 
 const MainHero: FC<Props> = ({ path }) => {
 	return (
-		<Box
-			sx={{
-				flex: 1.3,
-				position: 'relative'
-			}}
-		>
+		<Box className='relative hidden lg:inline flex-[1.3]'>
 			<Image src={path} alt='hero' layout='fill' objectFit='cover' />
 		</Box>
 	)
