@@ -9,7 +9,7 @@ const handler: (
 	res: NextApiResponse
 ) => Promise<any> = async (req: NextApiRequest, res: NextApiResponse) => {
 	// @desc   Create a todo
-	// @route  POST /api/user/[todoId]
+	// @route  POST /api/user/todo/makeTodo
 	// @access Private
 	if (req.method === 'POST') {
 		// todo list
