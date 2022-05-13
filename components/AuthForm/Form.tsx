@@ -2,7 +2,7 @@
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 import { Box, Button, Checkbox, FormControlLabel, Input } from '@mui/material'
 
-import FormError from './FormErorr'
+import FormError from './FormError'
 
 const Form = ({ errors, register, type, submit }) => {
 	const emailValidator = {

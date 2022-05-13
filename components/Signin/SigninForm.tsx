@@ -6,8 +6,8 @@ import { useMutation, useQueryClient } from 'react-query'
 import { loginQuery } from '@/services/api'
 import type { FormValues } from '@/types/form'
 
-import Form from '../Form'
-import FormWrapper from '../FormWrapper'
+import Form from '../AuthForm/Form'
+import FormWrapper from '../AuthForm/FormWrapper'
 
 const SigninForm: () => JSX.Element = () => {
 	const router = useRouter()
@@ -25,6 +25,8 @@ const SigninForm: () => JSX.Element = () => {
 				onError: err => {
 					// eslint-disable-next-line no-console
 					console.log(err)
+					alert('hey')
+					router.push('/')
 				},
 				onSuccess: () => {
 					router.push('/user')

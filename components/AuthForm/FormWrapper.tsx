@@ -2,7 +2,7 @@ import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 
-import AvatarComponent from './Signin/Avatar'
+import AvatarComponent from './Avatar'
 
 const FormWrapper: ({
 	children,
@@ -12,10 +12,10 @@ const FormWrapper: ({
 	type: 'signin' | 'signup'
 }) => JSX.Element = ({ children, type }) => {
 	return (
-		<Box className='w-full px-20 flex flex-col items-center'>
+		<Box className='w-full px-5 lg:px-20 flex flex-col items-center'>
 			<AvatarComponent />
 			<Typography component='h1' variant='h5'>
-				Sign up
+				{type === 'signin' ? 'Sign in' : 'Sign up'}
 			</Typography>
 
 			{children}
@@ -23,7 +23,7 @@ const FormWrapper: ({
 			<Box className='w-full text-right mt-2'>
 				<Link href={type === 'signin' ? 'signup' : 'signin'} variant='body2'>
 					{type === 'signin'
-						? 'Already have an account? Sign in'
+						? "Don't have an account? Sign up"
 						: 'Already have an account? Sign in'}
 				</Link>
 			</Box>
