@@ -1,3 +1,4 @@
+import { Box, Toolbar } from '@mui/material'
 import type { FC } from 'react'
 import React from 'react'
 
@@ -9,10 +10,13 @@ type Props = {
 
 const TodoLayout: FC<Props> = ({ children }) => {
 	return (
-		<div>
+		<div className='flex'>
 			<Navbar />
 			<Sidebar />
-			<main>{children}</main>
+			<Box data-cy='main' component='main' className='ml-[240px] bg-white p-6'>
+				<Toolbar data-cy='todo-toolbar' />
+				{children}
+			</Box>
 		</div>
 	)
 }

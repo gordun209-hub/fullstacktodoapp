@@ -1,4 +1,4 @@
-import useUser from '@/utils/useUser'
+import useUser from '../../hooks/useUser'
 
 const UserPage: () => JSX.Element = () => {
 	const { user } = useUser()

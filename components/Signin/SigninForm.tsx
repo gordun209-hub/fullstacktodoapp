@@ -1,13 +1,5 @@
-import {
-	Box,
-	Button,
-	Checkbox,
-	FormControlLabel,
-	Grid,
-	Link,
-	TextField,
-	Typography
-} from '@mui/material'
+import { Input } from '@mui/material'
+import Box from '@mui/material/Box'
 import { useRouter } from 'next/router'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
@@ -16,9 +8,15 @@ import { useMutation, useQueryClient } from 'react-query'
 import { loginQuery } from '@/services/api'
 import type { FormValues } from '@/types/form'
 
-import AvatarComponent from './Avatar'
+import useUser from '../../hooks/useUser'
+import FormWrapper from './FormWrapper'
 
 const SigninForm: () => JSX.Element = () => {
+	const router = useRouter()
+	const { user } = useUser()
+	if (user?.id) {
+		router.push('/user')
+	}
 	const {
 		register,
 		handleSubmit,
@@ -28,12 +26,8 @@ const SigninForm: () => JSX.Element = () => {
 		mutate(
 			{ email, password },
 			{
-				onError: err => {
-					// eslint-disable-next-line no-console
-					console.log(err)
-				},
 				onSuccess: () => {
-					router.push('/')
+					router.push('/user')
 				}
 			}
 		)
@@ -43,78 +37,62 @@ const SigninForm: () => JSX.Element = () => {
 		onSuccess: () => queryClient.invalidateQueries('user')
 	})
 
-	const router = useRouter()
 	return (
 		<Box
-			sx={{
-				my: 8,
-				mx: 4,
-				display: 'flex',
-				flexDirection: 'column',
-				alignItems: 'center'
-			}}
+			noValidate
+			data-cy='signin-form'
+			component='form'
+			sx={{ mt: 1 }}
+			onSubmit={handleSubmit(onSubmit)}
 		>
-			<AvatarComponent />
-			<Typography component='h1' variant='h5'>
-				Sign in
-			</Typography>
-			<Box
-				noValidate
-				component='form'
-				sx={{ mt: 1 }}
-				onSubmit={handleSubmit(onSubmit)}
-			>
-				<TextField
+			<FormWrapper>
+				<Input
 					required
 					fullWidth
 					autoFocus
+					data-cy='signin-email'
+					aria-invalid={errors.email ? 'true' : 'false'}
 					{...register('email', {
-						required: true,
-						pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-						minLength: 3
+						required: 'required',
+						pattern: {
+							value: /\S+@\S+\.\S+/,
+							message: 'Entered value does not match email format'
+						}
 					})}
-					margin='normal'
 					id='email'
-					label='Email Address'
+					type='email'
+					data-testid='email'
+					placeholder='example@mail.com'
 					name='email'
 					autoComplete='email'
 				/>
-				{errors.email && <p>{errors.email.message}</p>}
-				<TextField
+				{errors.email && (
+					<span data-cy='email-error' role='alert'>
+						{errors.email.message}
+					</span>
+				)}
+				<Input
 					required
 					fullWidth
-					margin='normal'
-					label='Password'
-					type='password'
-					{...register('password', { required: true, minLength: 6 })}
+					data-cy='signin-password'
+					data-testid='password'
+					{...register('password', {
+						required: 'required',
+						minLength: {
+							value: 5,
+							message: 'min length is 5'
+						}
+					})}
 					id='password'
 					autoComplete='current-password'
+					placeholder='password'
 				/>
-				<FormControlLabel
-					control={<Checkbox value='remember' color='primary' />}
-					label='Remember me'
-				/>
-				<Button
-					fullWidth
-					type='submit'
-					variant='contained'
-					sx={{ mt: 3, mb: 2 }}
-				>
-					Sign In
-				</Button>
-				<Grid container>
-					<Grid item xs>
-						<Link href='#' variant='body2'>
-							Forgot password?
-						</Link>
-					</Grid>
-					<Grid item>
-						<Link href='/signup' variant='body2'>
-							{"Don't have an account? Sign Up"}
-						</Link>
-					</Grid>
-				</Grid>
-			</Box>
+				{errors.password && (
+					<span data-cy='password-error' role='alert'>
+						{errors.password.message}
+					</span>
+				)}
+			</FormWrapper>
 		</Box>
 	)
 }

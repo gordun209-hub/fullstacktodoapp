@@ -1,5 +1,4 @@
 import { Box } from '@mui/material'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
 import type { ReactNode } from 'react'
 
 import {
@@ -9,25 +8,16 @@ import {
 	SigninForm
 } from '@/components/index'
 
-const theme = createTheme()
-
 const SignIn: {
 	(): JSX.Element
 	getLayout(page: ReactNode): JSX.Element
 } = () => {
 	return (
 		<div>
-			<Box
-				sx={{
-					display: 'flex',
-					height: '100vh'
-				}}
-			>
+			<Box className='h-screen flex'>
 				<MainHero path='/auth.jpg' />
 				<MainContent>
-					<ThemeProvider theme={theme}>
-						<SigninForm />
-					</ThemeProvider>
+					<SigninForm />
 				</MainContent>
 			</Box>
 		</div>
