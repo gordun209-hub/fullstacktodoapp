@@ -8,32 +8,11 @@ type Props = {
 
 const MainContent: FC<Props> = ({ children }) => {
 	return (
-		<Box
-			sx={{
-				position: 'relative',
-				flex: 1,
-				paddingY: 10,
-				paddingX: 5
-			}}
-		>
+		<Box className='relative flex-1 flex items-center justify-center py-10 px-5'>
 			{children}
 
-			<footer
-				style={{
-					left: 0,
-					right: 0,
-					bottom: 10,
-					textAlign: 'center',
-					position: 'absolute'
-				}}
-			>
-				<Typography
-					sx={{
-						fontSize: '0.9rem',
-						fontWeight: 'light',
-						color: 'text.secondary'
-					}}
-				>
+			<footer className='left-0 right-0 bottom-3 text-center absolute'>
+				<Typography className='text-sm text-zinc-500 font-light'>
 					<span>
 						&copy; {new Date().getFullYear()} Todo App. All rights reserved.
 					</span>
