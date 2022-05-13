@@ -5,12 +5,13 @@ const Navbar: () => JSX.Element = () => {
 
 	return (
 		<AppBar
+			data-cy='appbar'
 			className='bg-blue-500 shadow-none'
 			position='fixed'
 			sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
 		>
-			<Toolbar>
-				<Typography noWrap variant='h6' component='div'>
+			<Toolbar data-cy='toolbar'>
+				<Typography noWrap data-cy='todos' variant='h6' component='div'>
 					Todos
 				</Typography>
 			</Toolbar>

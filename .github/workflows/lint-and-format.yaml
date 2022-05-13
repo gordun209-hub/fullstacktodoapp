@@ -1,9 +1,7 @@
 name: Lint And Format
 on:
   push:
-
-    branches:
-      [master, develop]
+    branches: [master, develop, feature/test]
 
 jobs:
   simple-lint-and-refactor:

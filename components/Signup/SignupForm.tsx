@@ -29,7 +29,18 @@ const SignupForm: () => JSX.Element = () => {
 		formState: { errors }
 	} = useForm<FormValues>()
 	const onSubmit: SubmitHandler<FormValues> = ({ email, password }) => {
-		mutate({ email, password })
+		mutate(
+			{ email, password },
+			{
+				onError: err => {
+					// eslint-disable-next-line no-console
+					console.log(err)
+				},
+				onSuccess: () => {
+					router.push('/user')
+				}
+			}
+		)
 	}
 
 	const queryClient = useQueryClient()
@@ -41,6 +52,7 @@ const SignupForm: () => JSX.Element = () => {
 	return (
 		<Box
 			noValidate
+			data-cy='signup-form'
 			component='form'
 			className='my-8 mx-4 flex flex-col items-center'
 			onSubmit={handleSubmit(onSubmit)}
@@ -55,6 +67,8 @@ const SignupForm: () => JSX.Element = () => {
 						required
 						fullWidth
 						autoFocus
+						data-cy='signup-email'
+						data-testid='email'
 						aria-invalid={errors.email ? 'true' : 'false'}
 						{...register('email', {
 							required: 'required',
@@ -75,6 +89,7 @@ const SignupForm: () => JSX.Element = () => {
 					<Input
 						required
 						fullWidth
+						data-cy='signup-password'
 						{...register('password', {
 							required: 'required',
 							minLength: {
@@ -83,15 +98,19 @@ const SignupForm: () => JSX.Element = () => {
 							}
 						})}
 						id='password'
+						data-testid='password'
 						autoComplete='current-password'
 						placeholder='password'
 					/>
 					{errors.password && (
-						<span role='alert'>{errors.password.message}</span>
+						<span data-cy='password-error' role='alert'>
+							{errors.password.message}
+						</span>
 					)}
 				</Grid>
 				<Grid item xs={12}>
 					<FormControlLabel
+						data-cy='signup-remember'
 						className='text-zinc-500'
 						control={<Checkbox value='allowExtraEmails' color='primary' />}
 						label='I agree to the terms and conditions'
@@ -101,6 +120,7 @@ const SignupForm: () => JSX.Element = () => {
 
 			<Button
 				fullWidth
+				data-cy='signup-submit'
 				type='submit'
 				variant='contained'
 				className='bg-blue-500 hover:bg-blue-400 mt-3 mb-2'
@@ -110,8 +130,8 @@ const SignupForm: () => JSX.Element = () => {
 
 			<Grid container justifyContent='flex-end'>
 				<Grid item>
-					<Link href='signin' variant='body2'>
-						Already have an account? Sign in
+					<Link data-cy='signup-link' href='signin' variant='body2'>
+						<span data-cy='signup-text'>Already have an account? Sign in</span>
 					</Link>
 				</Grid>
 			</Grid>

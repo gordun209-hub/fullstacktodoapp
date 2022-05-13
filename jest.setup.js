@@ -6,10 +6,11 @@ let n = 0
 jest.mock('nanoid', () => ({
 	nanoid: () => `${n++}`
 }))
+import { setLogger } from 'react-query'
+
 // Used for __tests__/testing-library.js
 // Learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect'
-import { server } from './__mocks__/server.ts'
 global.fetch = fetch
 global.Headers = Headers
 global.Request = Request
@@ -17,6 +18,13 @@ global.Response = Response
 global.AbortController = AbortController
 // Establish API mocking before all tests.
 
+import { setupServer } from 'msw/node'
+
+import { handlers } from './__mocks__/handlers'
+
+// This configures a request mocking server with the given request handlers.
+
+export const server = setupServer(...handlers)
 beforeAll(() => server.listen())
 
 // // Reset any request handlers that we may add during the tests,
@@ -28,3 +36,8 @@ afterEach(() => server.resetHandlers())
 // // Clean up after the tests are finished.
 
 afterAll(() => server.close())
+setLogger({
+	log: console.log,
+	warn: console.warn,
+	error: () => {}
+})

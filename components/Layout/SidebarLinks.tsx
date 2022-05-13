@@ -42,7 +42,7 @@ const SidebarLinks: () => JSX.Element = () => {
 	const { type } = router.query
 
 	return (
-		<List>
+		<List data-cy='icon-list'>
 			{links.map(link => (
 				<Link
 					key={nanoid()}
@@ -59,11 +59,12 @@ const SidebarLinks: () => JSX.Element = () => {
 					>
 						<ListItemButton>
 							<ListItemIcon
+								data-cy='link-icon'
 								className={type === link.query ? ' text-blue-500' : ''}
 							>
 								{link.icon}
 							</ListItemIcon>
-							<ListItemText primary={link.name} />
+							<ListItemText data-cy='link-name' primary={link.name} />
 						</ListItemButton>
 					</ListItem>
 				</Link>

@@ -8,11 +8,15 @@ import { useMutation, useQueryClient } from 'react-query'
 import { loginQuery } from '@/services/api'
 import type { FormValues } from '@/types/form'
 
+import useUser from '../../hooks/useUser'
 import FormWrapper from './FormWrapper'
 
 const SigninForm: () => JSX.Element = () => {
 	const router = useRouter()
-
+	const { user } = useUser()
+	if (user?.id) {
+		router.push('/user')
+	}
 	const {
 		register,
 		handleSubmit,
@@ -22,10 +26,6 @@ const SigninForm: () => JSX.Element = () => {
 		mutate(
 			{ email, password },
 			{
-				onError: err => {
-					// eslint-disable-next-line no-console
-					console.log(err)
-				},
 				onSuccess: () => {
 					router.push('/user')
 				}
@@ -40,6 +40,7 @@ const SigninForm: () => JSX.Element = () => {
 	return (
 		<Box
 			noValidate
+			data-cy='signin-form'
 			component='form'
 			sx={{ mt: 1 }}
 			onSubmit={handleSubmit(onSubmit)}
@@ -49,6 +50,7 @@ const SigninForm: () => JSX.Element = () => {
 					required
 					fullWidth
 					autoFocus
+					data-cy='signin-email'
 					aria-invalid={errors.email ? 'true' : 'false'}
 					{...register('email', {
 						required: 'required',
@@ -59,14 +61,21 @@ const SigninForm: () => JSX.Element = () => {
 					})}
 					id='email'
 					type='email'
+					data-testid='email'
 					placeholder='example@mail.com'
 					name='email'
 					autoComplete='email'
 				/>
-				{errors.email && <span role='alert'>{errors.email.message}</span>}
+				{errors.email && (
+					<span data-cy='email-error' role='alert'>
+						{errors.email.message}
+					</span>
+				)}
 				<Input
 					required
 					fullWidth
+					data-cy='signin-password'
+					data-testid='password'
 					{...register('password', {
 						required: 'required',
 						minLength: {
@@ -78,7 +87,11 @@ const SigninForm: () => JSX.Element = () => {
 					autoComplete='current-password'
 					placeholder='password'
 				/>
-				{errors.password && <span role='alert'>{errors.password.message}</span>}
+				{errors.password && (
+					<span data-cy='password-error' role='alert'>
+						{errors.password.message}
+					</span>
+				)}
 			</FormWrapper>
 		</Box>
 	)

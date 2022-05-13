@@ -9,9 +9,9 @@ const HomeContent: () => JSX.Element = () => {
 	const { user } = useUser()
 	const route = user?.id ? '/user' : '/signup'
 	return (
-		<Box>
+		<Box data-cy='homeContent'>
 			<Typography variant='h2'>Todo App</Typography>
-			<Box className='mt-3 p-2 '>
+			<Box className='mt-3 p-2 ' data-cy='landingP'>
 				<Typography className='text-lg font-light text-zinc-500'>
 					This is a minimal todo app built with Next.js and Material-UI. Todo
 					app has never been so easy to use. It's super simple to add a new
@@ -27,11 +27,12 @@ const HomeContent: () => JSX.Element = () => {
 				</Typography>
 
 				<Button
+					data-cy='get-started-button'
 					className='mt-3 bg-green-500'
 					variant='contained'
 					color='secondary'
 				>
-					<Link href={`${route}`}>
+					<Link data-cy='get-started-link' href={`${route}`}>
 						<a>Get Started</a>
 					</Link>
 				</Button>

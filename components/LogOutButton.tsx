@@ -11,7 +11,7 @@ const LogOutButton: () => JSX.Element = () => {
 	})
 
 	return (
-		<button type='button' onClick={() => mutate()}>
+		<button type='button' data-cy='logout-button' onClick={() => mutate()}>
 			logout
 		</button>
 	)
