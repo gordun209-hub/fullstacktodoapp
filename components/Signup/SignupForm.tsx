@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from 'react-query'

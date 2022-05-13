@@ -14,6 +14,8 @@
 		"isolatedModules": true,
 		"jsx": "preserve",
 		"incremental": true,
+		"types": ["node", "jest", "@testing-library/jest-dom"],
+
 		"baseUrl": ".",
 		"paths": {
 			"@/layouts/*": ["components/layouts/*"],
@@ -28,13 +30,13 @@
 			"@/lib/*": ["lib/*"]
 		}
 	},
+
 	"include": [
 		"next-env.d.ts",
 		"**/*.ts",
 		"**/*.tsx",
 		"**/**/*.tsx",
 		"**/**/.tsx",
-		"/prisma/seed.ts",
 		"types.d.ts",
 		"jest.config.js"
 	],
