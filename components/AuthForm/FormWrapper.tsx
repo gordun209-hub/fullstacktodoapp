@@ -22,9 +22,13 @@ const FormWrapper: ({
 
 			<Box className='w-full text-right mt-2'>
 				<Link href={type === 'signin' ? 'signup' : 'signin'} variant='body2'>
-					{type === 'signin'
-						? "Don't have an account? Sign up"
-						: 'Already have an account? Sign in'}
+					{type === 'signin' ? (
+						<span data-cy='signup-text'>
+							Don&lsquo;t have an account? Sign up
+						</span>
+					) : (
+						<span data-cy='signin-text'>Already have an account? Sign in</span>
+					)}
 				</Link>
 			</Box>
 		</Box>

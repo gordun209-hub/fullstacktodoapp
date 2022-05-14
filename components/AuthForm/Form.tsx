@@ -1,10 +1,30 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 import { Box, Button, Checkbox, FormControlLabel, Input } from '@mui/material'
+import type { FC } from 'react'
+import type { FieldError, UseFormRegister } from 'react-hook-form'
+
+import type { FormValues } from '@/types/form'
 
 import FormError from './FormError'
 
-const Form = ({ errors, register, type, submit }) => {
+type FormProps = {
+	errors: {
+		email?: FieldError | undefined
+		password?: FieldError | undefined
+	}
+	register: UseFormRegister<FormValues>
+	type: 'signin' | 'signup'
+	submit: () => void
+	serverError?: string
+}
+const Form: FC<FormProps> = ({
+	errors,
+	register,
+	type,
+	submit,
+	serverError
+}) => {
 	const emailValidator = {
 		...register('email', {
 			required: 'required',
@@ -26,7 +46,12 @@ const Form = ({ errors, register, type, submit }) => {
 	}
 
 	return (
-		<Box className='w-full mt-1 space-y-4' component='form' onSubmit={submit}>
+		<Box
+			noValidate
+			className='w-full mt-1 space-y-4'
+			component='form'
+			onSubmit={submit}
+		>
 			<Input
 				required
 				fullWidth
@@ -39,7 +64,7 @@ const Form = ({ errors, register, type, submit }) => {
 				name='email'
 				autoComplete='email'
 			/>
-			<FormError errors={errors.email} />
+			<FormError errors={errors?.email} />
 			<Input
 				required
 				fullWidth
@@ -50,7 +75,9 @@ const Form = ({ errors, register, type, submit }) => {
 				autoComplete='current-password'
 				placeholder='password'
 			/>
+
 			<FormError errors={errors.password} />
+			<p className='text-red-500'>{serverError}</p>
 			<Box>
 				<FormControlLabel
 					className='text-zinc-500'
@@ -69,6 +96,7 @@ const Form = ({ errors, register, type, submit }) => {
 			</Box>
 			<Button
 				fullWidth
+				data-cy='form-submit'
 				type='submit'
 				variant='contained'
 				className='bg-blue-500 hover:bg-blue-400 mt-3 mb-2'
