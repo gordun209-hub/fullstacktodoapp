@@ -13,3 +13,4 @@ jobs:
         with:
           build: yarn install
           start: yarn dev
+          browser: chrome
