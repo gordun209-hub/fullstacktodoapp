@@ -1,12 +1,16 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Box, Button, Checkbox, Input, Typography } from '@mui/material'
 import type { Todo } from '@prisma/client'
+import { formatDistanceToNowStrict, parseISO } from 'date-fns'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import type { SyntheticEvent } from 'react'
 import React from 'react'
 import { useQuery } from 'react-query'
 
-import { useCreateTodo, useToggleComplete } from '@/hooks/index'
+import { SelectPriority } from '@/components/index'
+import ResponsiveDatePickers from '@/components/UserPage/DatePicker'
+import { useCreateTodo, useDeleteTodo, useToggleComplete } from '@/hooks/index'
 import { getTodoQuery } from '@/services/todos'
 
 const Todos: NextPage = () => {
@@ -15,17 +19,24 @@ const Todos: NextPage = () => {
 	const router = useRouter()
 	const filterType = router.query.type as string
 	const { mutate: completeTodo } = useToggleComplete()
-
 	const { data } = useQuery('todo', getTodoQuery)
-
-	const handleSubmit: (e: SyntheticEvent<HTMLFormElement>) => void = e => {
-		e.preventDefault()
-		createTodo({ priority: 1, completed: false, title: todo })
-		setTodo('')
+	const { mutate: deleteTodo } = useDeleteTodo()
+	const handleDelete: (id: string) => void = id => {
+		deleteTodo({ id })
 	}
-
 	const toggleComplete: (id: string) => void = id => {
 		completeTodo({ id })
+	}
+	const [value, setValue] = React.useState<Date | null>(new Date())
+	const handleSubmit: (e: SyntheticEvent<HTMLFormElement>) => void = e => {
+		e.preventDefault()
+		createTodo({
+			priority: priority,
+			completed: false,
+			title: todo,
+			deadline: value ? value : undefined
+		})
+		setTodo('')
 	}
 	const filterTodos: (todos: Todo[]) => Todo[] = todos => {
 		todos = todos.filter(todo => {
@@ -37,6 +48,10 @@ const Todos: NextPage = () => {
 		})
 		return todos
 	}
+	const [priority, setPriority] = React.useState<number>(1)
+	const calculateTime: (date: Date) => string = date => {
+		return formatDistanceToNowStrict(date, { addSuffix: true })
+	}
 	return (
 		<Box>
 			<Box
@@ -45,6 +60,7 @@ const Todos: NextPage = () => {
 				data-cy='todo-form'
 				onSubmit={handleSubmit}
 			>
+				<SelectPriority priority={priority} setPriority={setPriority} />
 				<Input
 					type='text'
 					data-cy='-todo-input'
@@ -52,6 +68,7 @@ const Todos: NextPage = () => {
 					value={todo}
 					onChange={e => setTodo(e.target.value)}
 				/>
+				<ResponsiveDatePickers value={value} setValue={setValue} />
 				<Button
 					type='submit'
 					disabled={!todo}
@@ -80,6 +97,21 @@ const Todos: NextPage = () => {
 							>
 								{todo.title}
 							</Typography>
+							{''}
+							<Typography>
+								priority:
+								{todo.priority === 1 && 'Low '}{' '}
+								{todo.priority === 2 && 'Medium '}{' '}
+								{todo.priority === 3 && 'High '}
+							</Typography>
+							{/* @ts-ignore */}{' '}
+							{todo?.deadline && calculateTime(parseISO(todo?.deadline))}
+							<Button
+								data-cy='todo-checkbox'
+								onClick={() => handleDelete(todo.id)}
+							>
+								Delete
+							</Button>
 						</Box>
 					))}
 			</Box>

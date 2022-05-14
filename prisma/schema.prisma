@@ -22,12 +22,13 @@ model User {
 }
 
 model Todo {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   title     String
   priority  Int
-  completed Boolean @default(false)
+  completed Boolean   @default(false)
   userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
+  deadline  DateTime?
 }

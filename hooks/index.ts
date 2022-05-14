@@ -1,4 +1,5 @@
 export { default as useCreateTodo } from '@/hooks/useCreateTodo'
+export { default as useDeleteTodo } from '@/hooks/useDeleteTodo'
 export { default as useGetUser } from '@/hooks/useGetUser'
 export { default as useGetUsers } from '@/hooks/useGetUsers'
 export { default as useLogin } from '@/hooks/useLogin'
