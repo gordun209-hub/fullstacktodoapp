@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Box, Button, Checkbox, Input, Typography } from '@mui/material'
-import { formatDistanceToNowStrict, parseISO } from 'date-fns'
+import { parseISO } from 'date-fns'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import type { SyntheticEvent } from 'react'
@@ -11,24 +10,29 @@ import { SelectPriority } from '@/components/index'
 import ResponsiveDatePickers from '@/components/UserPage/DatePicker'
 import { useCreateTodo, useDeleteTodo, useToggleComplete } from '@/hooks/index'
 import { getTodoQuery } from '@/services/todos'
+import calculateTime from '@/utils/calculateTime'
+import convertPriority from '@/utils/convertPriority'
 import filterTodos from '@/utils/filterTodos'
 
 const Todos: NextPage = () => {
-	const [todo, setTodo] = React.useState('')
-	const { mutate: createTodo } = useCreateTodo()
 	const router = useRouter()
 	const filterType = router.query.type as string
+
+	const [todo, setTodo] = React.useState('')
+	const [value, setValue] = React.useState<Date | null>(new Date())
+	const [priority, setPriority] = React.useState<number>(1)
+
+	const { mutate: createTodo } = useCreateTodo()
 	const { mutate: completeTodo } = useToggleComplete()
-	const { data } = useQuery('todo', getTodoQuery)
 	const { mutate: deleteTodo } = useDeleteTodo()
+	const { data } = useQuery('todo', getTodoQuery)
+
 	const handleDelete: (id: string) => void = id => {
 		deleteTodo({ id })
 	}
 	const toggleComplete: (id: string) => void = id => {
 		completeTodo({ id })
 	}
-
-	const [value, setValue] = React.useState<Date | null>(new Date())
 	const handleSubmit: (e: SyntheticEvent<HTMLFormElement>) => void = e => {
 		e.preventDefault()
 		createTodo({
@@ -38,11 +42,6 @@ const Todos: NextPage = () => {
 			deadline: value ? value : undefined
 		})
 		setTodo('')
-	}
-
-	const [priority, setPriority] = React.useState<number>(1)
-	const calculateTime: (date: Date) => string = date => {
-		return formatDistanceToNowStrict(date, { addSuffix: true })
 	}
 
 	return (
@@ -92,12 +91,8 @@ const Todos: NextPage = () => {
 							</Typography>
 							{''}
 							<Typography>
-								priority:
-								{todo.priority === 1 && 'Low '}{' '}
-								{todo.priority === 2 && 'Medium '}{' '}
-								{todo.priority === 3 && 'High '}
+								priority: {convertPriority(todo.priority)}
 							</Typography>
-							{/* @ts-ignore */}{' '}
 							{todo?.deadline && calculateTime(parseISO(todo?.deadline))}
 							<Button
 								data-cy='todo-checkbox'
