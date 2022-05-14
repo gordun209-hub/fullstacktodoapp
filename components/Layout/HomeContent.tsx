@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Box, Button, Typography } from '@mui/material'
 import GitHubIcon from '@mui/icons-material/GitHub'
-
+import { Box, Button, Typography } from '@mui/material'
 import Link from 'next/link'
 import React from 'react'
 
@@ -48,8 +47,8 @@ const HomeContent: () => JSX.Element = () => {
 						variant='outlined'
 						color='secondary'
 					>
-						<Link data-cy='get-started-link' href={`${route}`}>
-							<a>Get Started</a>
+						<Link href={`${route}`}>
+							<a data-cy='get-started-link'>Get Started</a>
 						</Link>
 					</Button>
 				</Box>

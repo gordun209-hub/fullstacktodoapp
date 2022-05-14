@@ -4,9 +4,9 @@ afterEach(() => {
 })
 describe('e2e', () => {
 	describe('user can navigate between pages', () => {
-		it('should naviagte to home page', () => {
+		it.only('should naviagte to home page', () => {
 			cy.visit('/')
-			cy.get('[data-cy="get-started-button"]').as('getStartedButton')
+			cy.get('[data-cy="get-started-link"]').as('getStartedButton')
 
 			cy.get('@getStartedButton').click()
 			cy.url().should('include', '/signup')
