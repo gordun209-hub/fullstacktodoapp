@@ -16,7 +16,7 @@ const Home: {
 	return (
 		<div>
 			<Box className='flex h-screen'>
-				<MainHero path='/hero.jpg' />
+				<MainHero />
 				<MainContent>
 					<HomeContent />
 				</MainContent>

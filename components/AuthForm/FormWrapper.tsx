@@ -1,8 +1,5 @@
-import Box from '@mui/material/Box'
-import Link from '@mui/material/Link'
-import Typography from '@mui/material/Typography'
-
-import AvatarComponent from './Avatar'
+import CheckIcon from '@mui/icons-material/Check'
+import { Box, Link, Typography } from '@mui/material'
 
 const FormWrapper: ({
 	children,
@@ -13,15 +10,22 @@ const FormWrapper: ({
 }) => JSX.Element = ({ children, type }) => {
 	return (
 		<Box className='w-full px-5 lg:px-20 flex flex-col items-center'>
-			<AvatarComponent />
-			<Typography component='h1' variant='h5'>
-				{type === 'signin' ? 'Sign in' : 'Sign up'}
-			</Typography>
-
+			<Box className='flex items-center mb-5'>
+				<CheckIcon className=' bg-blue-500 text-white text-6xl rounded-md p-1' />
+				<Typography
+					variant='p'
+					className='text-3xl font-medium ml-3 text-blue-500'
+				>
+					Todo
+				</Typography>
+			</Box>
 			{children}
-
-			<Box className='w-full text-right mt-2'>
-				<Link href={type === 'signin' ? 'signup' : 'signin'} variant='body2'>
+			<Box className='w-full text-right mt-5'>
+				<Link
+					className='no-underline text-blue-500'
+					href={type === 'signin' ? 'signup' : 'signin'}
+					variant='body2'
+				>
 					{type === 'signin' ? (
 						<span data-cy='signup-text'>
 							Don&lsquo;t have an account? Sign up
