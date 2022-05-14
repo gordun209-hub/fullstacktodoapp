@@ -4,7 +4,7 @@ afterEach(() => {
 })
 describe('e2e', () => {
 	describe('user can navigate between pages', () => {
-		it.only('should naviagte to home page', () => {
+		it('should naviagte to home page', () => {
 			cy.visit('/')
 			cy.get('[data-cy="get-started-link"]').as('getStartedButton')
 
