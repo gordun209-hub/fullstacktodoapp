@@ -16,7 +16,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
 		const deletedTodo = await prisma.todo.delete({
 			where: {
-				id: String(req.query.deleteTodo)
+				id: String(req.query.delete)
 			}
 		})
 		res.status(200).json({ message: deletedTodo })
