@@ -7,7 +7,6 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '@/lib/prisma'
 
 //! Fixed and tested
-//! Only signined user can delete hi
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	if (!req.cookies.ACCESS_TOKEN) {
