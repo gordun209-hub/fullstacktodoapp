@@ -28,7 +28,7 @@ const handler: (
 					userId: user.id
 				}
 			})
-			res.status(200).json({ message: todos })
+			res.status(200).json(todos)
 		} catch (error) {
 			res.status(401).json({ message: 'no todo listed', error })
 		}
