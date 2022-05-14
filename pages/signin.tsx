@@ -15,7 +15,7 @@ const SignIn: {
 	return (
 		<div>
 			<Box className='h-screen flex'>
-				<MainHero path='/auth.jpg' />
+				<MainHero />
 				<MainContent>
 					<SigninForm />
 				</MainContent>
