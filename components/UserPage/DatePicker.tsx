@@ -4,7 +4,6 @@ import TextField from '@mui/material/TextField'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import * as React from 'react'
 
 export default function ResponsiveDatePickers({
@@ -15,7 +14,7 @@ export default function ResponsiveDatePickers({
 	setValue: (value: Date | null) => void
 }) {
 	return (
-		<LocalizationProvider dateAdapter={AdapterDateFns}>
+		<LocalizationProvider className='flex-1' dateAdapter={AdapterDateFns}>
 			<Stack spacing={3}>
 				<DatePicker
 					disablePast

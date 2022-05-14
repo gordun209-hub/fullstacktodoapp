@@ -1,18 +1,35 @@
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { AppBar, Toolbar, Typography } from '@mui/material'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const Navbar: () => JSX.Element = () => {
 	const drawerWidth = 240
 
+	const router = useRouter()
+	const { type } = router.query
+
 	return (
 		<AppBar
 			data-cy='appbar'
-			className='bg-blue-500 shadow-none'
+			className='bg-white shadow-none border-b-[1px]'
 			position='fixed'
 			sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
 		>
 			<Toolbar data-cy='toolbar'>
-				<Typography noWrap data-cy='todos' variant='h6' component='div'>
-					Todos
+				<Typography
+					className='w-full text-blue-500 flex items-center justify-between'
+					noWrap
+					data-cy='todos'
+					variant='h6'
+					component='div'
+				>
+					{type ? type.toUpperCase() : 'USER'}
+					<Link href='/user' passHref>
+						<a>
+							<AccountCircleIcon className='text-4xl cursor-pointer' />
+						</a>
+					</Link>
 				</Typography>
 			</Toolbar>
 		</AppBar>

@@ -51,7 +51,7 @@ const Form: FC<FormProps> = ({
 	return (
 		<Box
 			noValidate
-			className='w-full mt-1 space-y-4'
+			className='w-full mt-10 space-y-4'
 			component='form'
 			onSubmit={submit}
 		>

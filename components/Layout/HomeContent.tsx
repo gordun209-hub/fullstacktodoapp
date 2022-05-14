@@ -6,15 +6,16 @@ import React from 'react'
 
 import useUser from '@/hooks/useUser'
 
+import Logo from '../Logo'
+
 const HomeContent: () => JSX.Element = () => {
 	const { user } = useUser()
 	const route = user?.id ? '/user' : '/signup'
 	return (
 		<Box data-cy='homeContent' className='px-10'>
-			<Typography variant='h2' className='-ml-3'>
-				Todo App
-			</Typography>
-			<Box className='mt-5' data-cy='landingP'>
+			<Logo size='lg' />
+
+			<Box className='mt-8' data-cy='landingP'>
 				<Typography className='text-lg font-light text-zinc-500'>
 					This is a minimal todo app built with Next.js and Material-UI. Todo
 					app has never been so easy to use. It's super simple to add a new
@@ -23,7 +24,7 @@ const HomeContent: () => JSX.Element = () => {
 					to star us on GitHub. 🤩
 				</Typography>
 
-				<Box className='flex gap-3 mt-5'>
+				<Box className='flex gap-3 mt-8'>
 					<Button
 						className='bg-blue-500 hover:bg-blue-400'
 						data-cy='get-started-button'

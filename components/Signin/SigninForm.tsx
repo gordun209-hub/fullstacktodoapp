@@ -21,7 +21,7 @@ const SigninForm: () => JSX.Element = () => {
 		formState: { errors }
 	} = useForm<FormValues>()
 
-	const { mutate } = useLoginMutation()
+	const { mutate, error } = useLoginMutation()
 	const onSubmit: SubmitHandler<FormValues> = ({ email, password }) => {
 		mutate({ email, password })
 	}
@@ -29,6 +29,7 @@ const SigninForm: () => JSX.Element = () => {
 	return (
 		<FormWrapper type='signin'>
 			<Form
+				serverError={(error as Error)?.response?.data.error}
 				errors={errors}
 				register={register}
 				type='signin'

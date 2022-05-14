@@ -1,5 +1,6 @@
 import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined'
 import MoveToInboxOutlinedIcon from '@mui/icons-material/MoveToInboxOutlined'
+import SsidChartIcon from '@mui/icons-material/SsidChart'
 import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined'
 import UpcomingOutlinedIcon from '@mui/icons-material/UpcomingOutlined'
 import {
@@ -38,6 +39,12 @@ const links = [
 		icon: <EventAvailableOutlinedIcon />,
 		query: 'completed',
 		datacy: 'completed-link'
+	},
+	{
+		name: 'Dashboard',
+		icon: <SsidChartIcon />,
+		link: 'dashboard',
+		datacy: 'dashboard-link'
 	}
 ]
 
@@ -46,7 +53,7 @@ const SidebarLinks: () => JSX.Element = () => {
 	const { type } = router.query
 
 	return (
-		<List data-cy='icon-list'>
+		<List data-cy='icon-list' className='ml-2'>
 			{links.map(link => (
 				<Link
 					key={nanoid()}
@@ -59,11 +66,15 @@ const SidebarLinks: () => JSX.Element = () => {
 				>
 					<ListItem
 						disablePadding
-						className={type === link.query ? 'text-blue-500' : ''}
+						className={
+							type === link.query ? 'text-blue-500 ' : 'text-zinc-500 '
+						}
 					>
 						<ListItemButton data-cy={`-${link.datacy}`}>
 							<ListItemIcon
-								className={type === link.query ? ' text-blue-500' : ''}
+								className={
+									type === link.query ? ' text-blue-500' : 'text-gray-500'
+								}
 							>
 								{link.icon}
 							</ListItemIcon>
