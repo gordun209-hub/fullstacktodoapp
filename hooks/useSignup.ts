@@ -4,9 +4,12 @@ import { useMutation, useQueryClient } from 'react-query'
 
 import { signupQuery } from '@/services/api'
 
+type ServerError = {
+	error: string
+}
 const useSignupMutation: () => {
 	mutate: UseMutateFunction<
-		User,
+		User | ServerError,
 		unknown,
 		{
 			email: string
@@ -16,16 +19,17 @@ const useSignupMutation: () => {
 	>
 	isLoading: boolean
 	error: unknown
-	data: User | undefined
+	data: User | ServerError | undefined
+	isError: boolean
 } = () => {
 	const queryClient = useQueryClient()
 
-	const { mutate, data, error, isLoading } = useMutation(signupQuery, {
+	const { mutate, data, error, isLoading, isError } = useMutation(signupQuery, {
 		onSuccess: () => {
 			queryClient.invalidateQueries('user')
 		}
 	})
 
-	return { mutate, isLoading, error, data }
+	return { mutate, isLoading, error, data, isError }
 }
 export default useSignupMutation

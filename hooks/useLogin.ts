@@ -28,9 +28,6 @@ const useLoginMutation: () => {
 			queryClient.invalidateQueries('user').then(() => {
 				router.push('/user')
 			})
-		},
-		onError: err => {
-			console.log(err)
 		}
 	})
 	return { mutate, isLoading, error, data }

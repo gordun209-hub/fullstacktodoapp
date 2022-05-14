@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import type { UseMutateFunction } from 'react-query'
 import { useMutation, useQueryClient } from 'react-query'
 
@@ -10,10 +11,12 @@ const useLogoutMutation: () => {
 	data: void | undefined
 } = () => {
 	const queryClient = useQueryClient()
-
+	const router = useRouter()
 	const { mutate, data, error, isLoading } = useMutation(logOutQuery, {
 		onSuccess: () => {
-			queryClient.invalidateQueries('user')
+			queryClient.invalidateQueries('user').then(() => {
+				router.push('/')
+			})
 		}
 	})
 	return { mutate, isLoading, error, data }
