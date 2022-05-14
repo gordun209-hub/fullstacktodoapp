@@ -6,10 +6,12 @@ import prisma from '@/lib/prisma'
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const {
 		title,
-		priority
+		priority,
+		completed
 	}: {
 		title: string
 		priority: number
+		completed: boolean
 	} = req.body
 
 	if (!req.cookies.ACCESS_TOKEN) {
@@ -23,7 +25,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			},
 			data: {
 				title,
-				priority
+				priority,
+				completed
 			}
 		})
 		res.status(200).json(updatedTodo)
