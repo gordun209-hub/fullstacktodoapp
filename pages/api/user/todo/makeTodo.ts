@@ -16,11 +16,13 @@ const handler: (
 		const {
 			title,
 			priority,
-			completed
+			completed,
+			deadline
 		}: {
 			title: string
 			priority: number
 			completed: boolean
+			deadline: Date
 		} = req.body
 
 		//! will check if the user has the cookie or not
@@ -40,6 +42,7 @@ const handler: (
 					priority,
 					completed,
 					updatedAt: new Date(),
+					deadline,
 					user: {
 						connect: {
 							id: token?.id

@@ -1,42 +1,50 @@
 import { Box, Button, Checkbox, Input, Typography } from '@mui/material'
-import type { Todo } from '@prisma/client'
+import { parseISO } from 'date-fns'
 import type { NextPage } from 'next'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import type { SyntheticEvent } from 'react'
 import React from 'react'
 import { useQuery } from 'react-query'
 
-import { useCreateTodo, useToggleComplete } from '@/hooks/index'
-import { getTodoQuery } from '@/services/todos'
+import { SelectPriority } from '@/components/index'
+import ResponsiveDatePickers from '@/components/UserPage/DatePicker'
+import { useCreateTodo, useDeleteTodo, useToggleComplete } from '@/hooks/index'
+import { getTodosQuery } from '@/services/todos'
+import calculateTime from '@/utils/calculateTime'
+import convertPriority from '@/utils/convertPriority'
+import filterTodos from '@/utils/filterTodos'
 
 const Todos: NextPage = () => {
-	const [todo, setTodo] = React.useState('')
-	const { mutate: createTodo } = useCreateTodo()
 	const router = useRouter()
 	const filterType = router.query.type as string
+
+	const [todo, setTodo] = React.useState('')
+	const [value, setValue] = React.useState<Date | null>(new Date())
+	const [priority, setPriority] = React.useState<number>(1)
+
+	const { mutate: createTodo } = useCreateTodo()
 	const { mutate: completeTodo } = useToggleComplete()
+	const { mutate: deleteTodo } = useDeleteTodo()
+	const { data } = useQuery('todo', getTodosQuery)
 
-	const { data } = useQuery('todo', getTodoQuery)
-
-	const handleSubmit: (e: SyntheticEvent<HTMLFormElement>) => void = e => {
-		e.preventDefault()
-		createTodo({ priority: 1, completed: false, title: todo })
-		setTodo('')
+	const handleDelete: (id: string) => void = id => {
+		deleteTodo({ id })
 	}
-
 	const toggleComplete: (id: string) => void = id => {
 		completeTodo({ id })
 	}
-	const filterTodos: (todos: Todo[]) => Todo[] = todos => {
-		todos = todos.filter(todo => {
-			if (filterType === 'completed') {
-				return todo.completed
-			} else {
-				return true
-			}
+	const handleSubmit: (e: SyntheticEvent<HTMLFormElement>) => void = e => {
+		e.preventDefault()
+		createTodo({
+			priority: priority,
+			completed: false,
+			title: todo,
+			deadline: value ? value : undefined
 		})
-		return todos
+		setTodo('')
 	}
+
 	return (
 		<Box>
 			<Box
@@ -45,6 +53,7 @@ const Todos: NextPage = () => {
 				data-cy='todo-form'
 				onSubmit={handleSubmit}
 			>
+				<SelectPriority priority={priority} setPriority={setPriority} />
 				<Input
 					type='text'
 					data-cy='-todo-input'
@@ -52,6 +61,7 @@ const Todos: NextPage = () => {
 					value={todo}
 					onChange={e => setTodo(e.target.value)}
 				/>
+				<ResponsiveDatePickers value={value} setValue={setValue} />
 				<Button
 					type='submit'
 					disabled={!todo}
@@ -65,7 +75,7 @@ const Todos: NextPage = () => {
 
 			<Box>
 				{data &&
-					filterTodos(data)?.map(todo => (
+					filterTodos(data, filterType)?.map(todo => (
 						<Box key={todo.id} className='flex items-center'>
 							<Checkbox
 								data-cy='todo-checkbox'
@@ -80,11 +90,31 @@ const Todos: NextPage = () => {
 							>
 								{todo.title}
 							</Typography>
+
+							{''}
+							<Typography>
+								priority: {convertPriority(todo.priority)}
+							</Typography>
+							{todo?.deadline && calculateTime(parseISO(todo?.deadline))}
+							<Button
+								data-cy='todo-checkbox'
+								onClick={() => handleDelete(todo.id)}
+							>
+								Delete
+							</Button>
+							<Link href={`/user/todos/${todo.id}`}>
+								<Button
+									data-cy='todo-edit'
+									variant='contained'
+									className='bg-blue-500 hover:bg-blue-400 mt-3 mb-2'
+								>
+									<Typography data-cy='edit-todo'>Edit</Typography>
+								</Button>
+							</Link>
 						</Box>
 					))}
 			</Box>
 		</Box>
 	)
 }
-
 export default Todos

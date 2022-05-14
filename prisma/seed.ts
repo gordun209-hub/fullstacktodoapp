@@ -36,8 +36,8 @@ const seed: () => Promise<[User, User, Todo, Todo]> = async () => {
 		data: {
 			completed: false,
 			priority: 2,
-			updatedAt: new Date(),
 			title: 'todo1',
+			deadline: new Date(),
 			user: {
 				connect: {
 					id: first.id
@@ -49,8 +49,8 @@ const seed: () => Promise<[User, User, Todo, Todo]> = async () => {
 		data: {
 			completed: true,
 			priority: 1,
-			updatedAt: new Date(),
 			title: 'todo2',
+			deadline: new Date(),
 			user: {
 				connect: {
 					id: second.id

@@ -39,7 +39,9 @@
 		"**/**/*.tsx",
 		"**/**/.tsx",
 		"types.d.ts",
-		"jest.config.js"
+		"jest.config.js",
+		"components/Charts/Bubble.js",
+		"components/Charts/Bubble.js"
 	],
 	"exclude": ["node_modules"]
 }

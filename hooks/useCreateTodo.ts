@@ -12,6 +12,7 @@ const useCreateTodo: () => {
 			priority: number
 			title: string
 			completed: boolean
+			deadline?: Date
 		},
 		unknown
 	>
@@ -33,7 +34,6 @@ const useCreateTodo: () => {
 	return {
 		data,
 		mutate,
-
 		isLoading,
 		error,
 		isSuccess
