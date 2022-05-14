@@ -27,7 +27,8 @@
 			"@/app/*": ["app/*"],
 			"@/features/*": ["features/*"],
 			"@/services/*": ["services/*"],
-			"@/lib/*": ["lib/*"]
+			"@/lib/*": ["lib/*"],
+			"@/hooks/*": ["hooks/*"]
 		}
 	},
 

@@ -1,12 +1,11 @@
 import { useRouter } from 'next/router'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
-import { useMutation, useQueryClient } from 'react-query'
 
-import { loginQuery } from '@/services/api'
+import useLoginMutation from '@/hooks/useLogin'
+import useUser from '@/hooks/useUser'
 import type { FormValues } from '@/types/form'
 
-import useUser from '../../hooks/useUser'
 import Form from '../AuthForm/Form'
 import FormWrapper from '../AuthForm/FormWrapper'
 
@@ -22,26 +21,10 @@ const SigninForm: () => JSX.Element = () => {
 		formState: { errors }
 	} = useForm<FormValues>()
 
+	const { mutate } = useLoginMutation()
 	const onSubmit: SubmitHandler<FormValues> = ({ email, password }) => {
-		mutate(
-			{ email, password },
-			{
-				onError: err => {
-					// eslint-disable-next-line no-console
-					console.log(err)
-					alert('hey')
-					router.push('/')
-				},
-				onSuccess: () => {
-					router.push('/user')
-				}
-			}
-		)
+		mutate({ email, password })
 	}
-	const queryClient = useQueryClient()
-	const { mutate } = useMutation(loginQuery, {
-		onSuccess: () => queryClient.invalidateQueries('user')
-	})
 
 	return (
 		<FormWrapper type='signin'>

@@ -1,4 +1,6 @@
+/* eslint-disable no-console */
 import type { User } from '@prisma/client'
+import { useRouter } from 'next/router'
 import type { UseMutateFunction } from 'react-query'
 import { useMutation, useQueryClient } from 'react-query'
 
@@ -18,11 +20,17 @@ const useLoginMutation: () => {
 	error: unknown
 	data: User | undefined
 } = () => {
+	const router = useRouter()
 	const queryClient = useQueryClient()
 
 	const { mutate, data, error, isLoading } = useMutation(loginQuery, {
 		onSuccess: () => {
-			queryClient.invalidateQueries('user')
+			queryClient.invalidateQueries('user').then(() => {
+				router.push('/user')
+			})
+		},
+		onError: err => {
+			console.log(err)
 		}
 	})
 	return { mutate, isLoading, error, data }

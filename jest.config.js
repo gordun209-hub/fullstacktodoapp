@@ -19,7 +19,8 @@ const customJestConfig = {
 		'^@/app/(.*)$': '<rootDir>/app/$1',
 		'^@/features/(.*)$': '<rootDir>/features/$1',
 		'^@/services/(.*)$': '<rootDir>/services/$1',
-		'^@/styles/(.*)$': '<rootDir>/styles/$1'
+		'^@/styles/(.*)$': '<rootDir>/styles/$1',
+		'^@/hooks/(.*)$': '<rootDir>/hooks/$1'
 	},
 	testEnvironment: 'jest-environment-jsdom',
 	testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/cypress']
