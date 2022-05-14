@@ -16,8 +16,15 @@ type FormProps = {
 	register: UseFormRegister<FormValues>
 	type: 'signin' | 'signup'
 	submit: () => void
+	serverError?: string
 }
-const Form: FC<FormProps> = ({ errors, register, type, submit }) => {
+const Form: FC<FormProps> = ({
+	errors,
+	register,
+	type,
+	submit,
+	serverError
+}) => {
 	const emailValidator = {
 		...register('email', {
 			required: 'required',
@@ -70,6 +77,7 @@ const Form: FC<FormProps> = ({ errors, register, type, submit }) => {
 			/>
 
 			<FormError errors={errors.password} />
+			<p className='text-red-500'>{serverError}</p>
 			<Box>
 				<FormControlLabel
 					className='text-zinc-500'
