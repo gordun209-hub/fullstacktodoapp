@@ -1,6 +1,7 @@
 import { Box, Button, Checkbox, Input, Typography } from '@mui/material'
 import { parseISO } from 'date-fns'
 import type { NextPage } from 'next'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import type { SyntheticEvent } from 'react'
 import React from 'react'
@@ -9,7 +10,7 @@ import { useQuery } from 'react-query'
 import { SelectPriority } from '@/components/index'
 import ResponsiveDatePickers from '@/components/UserPage/DatePicker'
 import { useCreateTodo, useDeleteTodo, useToggleComplete } from '@/hooks/index'
-import { getTodoQuery } from '@/services/todos'
+import { getTodosQuery } from '@/services/todos'
 import calculateTime from '@/utils/calculateTime'
 import convertPriority from '@/utils/convertPriority'
 import filterTodos from '@/utils/filterTodos'
@@ -25,7 +26,7 @@ const Todos: NextPage = () => {
 	const { mutate: createTodo } = useCreateTodo()
 	const { mutate: completeTodo } = useToggleComplete()
 	const { mutate: deleteTodo } = useDeleteTodo()
-	const { data } = useQuery('todo', getTodoQuery)
+	const { data } = useQuery('todo', getTodosQuery)
 
 	const handleDelete: (id: string) => void = id => {
 		deleteTodo({ id })
@@ -89,6 +90,7 @@ const Todos: NextPage = () => {
 							>
 								{todo.title}
 							</Typography>
+
 							{''}
 							<Typography>
 								priority: {convertPriority(todo.priority)}
@@ -100,6 +102,15 @@ const Todos: NextPage = () => {
 							>
 								Delete
 							</Button>
+							<Link href={`/user/todos/${todo.id}`}>
+								<Button
+									data-cy='todo-edit'
+									variant='contained'
+									className='bg-blue-500 hover:bg-blue-400 mt-3 mb-2'
+								>
+									<Typography data-cy='edit-todo'>Edit</Typography>
+								</Button>
+							</Link>
 						</Box>
 					))}
 			</Box>

@@ -23,7 +23,7 @@ const createTodoQuery: ({
 
 	return res.data
 }
-const getTodoQuery: () => Promise<Todo[]> = async () => {
+const getTodosQuery: () => Promise<Todo[]> = async () => {
 	const res = await axios.get(`${baseUrl}/api/todos`)
 	return res.data
 }
@@ -43,5 +43,16 @@ const deleteTodoQuery: ({ id }: { id: string }) => Promise<Todo> = async ({
 	const res = await axios.post(`${baseUrl}/api/user/todo/deleteTodo/${id}`)
 	return res.data
 }
-
-export { completeTodoQuery, createTodoQuery, deleteTodoQuery, getTodoQuery }
+const getTodoQuery: ({ id }: { id: string }) => Promise<Todo> = async ({
+	id
+}) => {
+	const res = await axios.get(`${baseUrl}/api/user/todo/getTodo/${id}`)
+	return res.data
+}
+export {
+	completeTodoQuery,
+	createTodoQuery,
+	deleteTodoQuery,
+	getTodoQuery,
+	getTodosQuery
+}
