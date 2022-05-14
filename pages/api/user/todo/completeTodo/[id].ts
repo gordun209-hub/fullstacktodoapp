@@ -26,7 +26,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				id: String(req.query.id)
 			},
 			data: {
-				completed: !todo.completed
+				completed: !todo?.completed
 			}
 		})
 		res.status(200).json(updatedTodo)

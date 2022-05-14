@@ -17,23 +17,27 @@ import React from 'react'
 const links = [
 	{
 		name: 'Inbox',
+		datacy: 'inbox-link',
 		icon: <MoveToInboxOutlinedIcon />,
 		query: 'inbox'
 	},
 	{
 		name: 'Today',
 		icon: <TodayOutlinedIcon />,
-		query: 'today'
+		query: 'today',
+		datacy: 'today-link'
 	},
 	{
 		name: 'Upcoming',
 		icon: <UpcomingOutlinedIcon />,
-		query: 'upcoming'
+		query: 'upcoming',
+		datacy: 'upcoming-link'
 	},
 	{
 		name: 'Completed',
 		icon: <EventAvailableOutlinedIcon />,
-		query: 'completed'
+		query: 'completed',
+		datacy: 'completed-link'
 	}
 ]
 
@@ -57,14 +61,13 @@ const SidebarLinks: () => JSX.Element = () => {
 						disablePadding
 						className={type === link.query ? 'text-blue-500' : ''}
 					>
-						<ListItemButton>
+						<ListItemButton data-cy={`-${link.datacy}`}>
 							<ListItemIcon
-								data-cy='link-icon'
 								className={type === link.query ? ' text-blue-500' : ''}
 							>
 								{link.icon}
 							</ListItemIcon>
-							<ListItemText data-cy='link-name' primary={link.name} />
+							<ListItemText data-cy={`${link.datacy}`} primary={link.name} />
 						</ListItemButton>
 					</ListItem>
 				</Link>
