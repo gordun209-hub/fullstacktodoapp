@@ -8,8 +8,7 @@ async function main() {
 	return await prisma.$transaction([deleteUsers, deleteTodos])
 }
 main()
-	.catch(e => {
-		console.error(e)
+	.catch(() => {
 		process.exit(1)
 	})
 	.finally(async () => {

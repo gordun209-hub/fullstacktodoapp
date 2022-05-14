@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event'
 
 import { SigninForm } from '@/components/index'
-import { render, screen, within } from '@/utils/testUtils'
+import { render, screen } from '@/utils/testUtils'
 
 jest.mock('next/router', () => ({
 	useRouter: jest.fn(() => ({
@@ -17,10 +17,8 @@ describe('Signin form', () => {
 		})
 		it('should display matching error when email is invalid', async () => {
 			render(<SigninForm />)
-			const emailInput = screen.getByTestId('email')
-			within(emailInput).getByRole('textbox')
-			const passwordInput = screen.getByTestId('password')
-			within(passwordInput).getByRole('textbox')
+			const emailInput = screen.getByRole('textbox')
+			const passwordInput = screen.getByPlaceholderText(/password/i)
 			await userEvent.type(emailInput, 'email')
 			await userEvent.type(passwordInput, 'password')
 			await userEvent.click(screen.getByRole('button', { name: /sign in/i }))
@@ -31,10 +29,8 @@ describe('Signin form', () => {
 		})
 		it('should display matching error when password is invalid', async () => {
 			render(<SigninForm />)
-			const emailInput = screen.getByTestId('email')
-			within(emailInput).getByRole('textbox')
-			const passwordInput = screen.getByTestId('password')
-			within(passwordInput).getByRole('textbox')
+			const emailInput = screen.getByRole('textbox')
+			const passwordInput = screen.getByPlaceholderText(/password/i)
 			await userEvent.type(emailInput, 'ali-han80@hotmail.com')
 			await userEvent.type(passwordInput, 'pass')
 			await userEvent.click(screen.getByRole('button', { name: /sign in/i }))

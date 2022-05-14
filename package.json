@@ -23,6 +23,7 @@
 		"@types/bcrypt": "^5.0.0",
 		"@types/cookie": "^0.5.1",
 		"@types/jsonwebtoken": "^8.5.8",
+		"axios": "^0.27.2",
 		"bcrypt": "^5.0.1",
 		"cookie": "^0.5.0",
 		"cross-fetch": "^3.1.5",
@@ -35,11 +36,11 @@
 		"react-query": "^3.39.0"
 	},
 	"devDependencies": {
+		"@hookform/devtools": "^4.1.0",
 		"@testing-library/cypress": "^8.0.2",
 		"@testing-library/jest-dom": "^5.16.4",
 		"@testing-library/react": "^13.2.0",
 		"@testing-library/react-hooks": "^8.0.0",
-		"@hookform/devtools": "^4.1.0",
 		"@testing-library/user-event": "^14.2.0",
 		"@types/bcrypt": "^5.0.0",
 		"@types/cookie": "^0.5.1",
