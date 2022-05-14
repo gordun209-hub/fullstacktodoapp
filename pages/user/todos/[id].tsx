@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { format, parseISO } from 'date-fns'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
@@ -23,6 +24,7 @@ const Todo: NextPage = () => {
 					<div className='py-3 px-6 border-b border-gray-300'>Featured</div>
 					<div className='p-6'>
 						<h5 className='text-gray-900 text-xl font-medium mb-2'>
+							{/*// @ts-ignore */}
 							created at : {format(parseISO(data?.createdAt), 'yyyy-MM-dd')}
 						</h5>
 						<p className='text-gray-700 text-base mb-4'>{data?.title}</p>
@@ -34,6 +36,8 @@ const Todo: NextPage = () => {
 						</button>
 					</div>
 					<div className='py-3 px-6 border-t border-gray-300 text-gray-600'>
+						{/*// @ts-ignore */}
+
 						{data.deadline && calculateTime(parseISO(data?.deadline))}
 					</div>
 				</div>
