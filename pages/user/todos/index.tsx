@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Box, Button, Checkbox, Input, Typography } from '@mui/material'
-import type { Todo } from '@prisma/client'
 import { formatDistanceToNowStrict, parseISO } from 'date-fns'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
@@ -12,6 +11,7 @@ import { SelectPriority } from '@/components/index'
 import ResponsiveDatePickers from '@/components/UserPage/DatePicker'
 import { useCreateTodo, useDeleteTodo, useToggleComplete } from '@/hooks/index'
 import { getTodoQuery } from '@/services/todos'
+import filterTodos from '@/utils/filterTodos'
 
 const Todos: NextPage = () => {
 	const [todo, setTodo] = React.useState('')
@@ -27,6 +27,7 @@ const Todos: NextPage = () => {
 	const toggleComplete: (id: string) => void = id => {
 		completeTodo({ id })
 	}
+
 	const [value, setValue] = React.useState<Date | null>(new Date())
 	const handleSubmit: (e: SyntheticEvent<HTMLFormElement>) => void = e => {
 		e.preventDefault()
@@ -38,20 +39,12 @@ const Todos: NextPage = () => {
 		})
 		setTodo('')
 	}
-	const filterTodos: (todos: Todo[]) => Todo[] = todos => {
-		todos = todos.filter(todo => {
-			if (filterType === 'completed') {
-				return todo.completed
-			} else {
-				return true
-			}
-		})
-		return todos
-	}
+
 	const [priority, setPriority] = React.useState<number>(1)
 	const calculateTime: (date: Date) => string = date => {
 		return formatDistanceToNowStrict(date, { addSuffix: true })
 	}
+
 	return (
 		<Box>
 			<Box
@@ -82,7 +75,7 @@ const Todos: NextPage = () => {
 
 			<Box>
 				{data &&
-					filterTodos(data)?.map(todo => (
+					filterTodos(data, filterType)?.map(todo => (
 						<Box key={todo.id} className='flex items-center'>
 							<Checkbox
 								data-cy='todo-checkbox'
@@ -118,5 +111,4 @@ const Todos: NextPage = () => {
 		</Box>
 	)
 }
-
 export default Todos
