@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import jwt from 'jsonwebtoken'
 import type { NextApiRequest, NextApiResponse } from 'next'
@@ -50,7 +51,16 @@ const handler: (
 					}
 				}
 			})
-			res.status(202).json(todo)
+			//! If the user does not provide required information in input
+			//! The message will be thrown
+			todo.title === '' ||
+			todo.priority < 0 ||
+			todo.completed === undefined ||
+			null
+				? res
+						.status(201)
+						.json({ message: 'The user has no todo or provided invalid input' })
+				: res.status(200).json(todo)
 		} catch (error) {
 			res.status(400).json({ message: error })
 		}
