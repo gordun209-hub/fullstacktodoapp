@@ -1,8 +1,6 @@
-import Divider from '@mui/material/Divider'
-import Drawer from '@mui/material/Drawer'
-import Toolbar from '@mui/material/Toolbar'
-import * as React from 'react'
+import { Box, Divider, Drawer, Toolbar } from '@mui/material'
 
+import Logo from '../Logo'
 import LogOutButton from '../LogOutButton'
 import SidebarLinks from './SidebarLinks'
 
@@ -22,8 +20,8 @@ const Sidebar: () => JSX.Element = () => {
 			variant='permanent'
 			anchor='left'
 		>
-			<Toolbar className='bg-blue-500 text-white text-lg font-black'>
-				TODO APP
+			<Toolbar className='flex items-center'>
+				<Logo size='md' />
 			</Toolbar>
 			<Divider />
 			<SidebarLinks />

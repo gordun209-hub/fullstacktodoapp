@@ -9,7 +9,7 @@ const SelecPriority: ({
 	setPriority: (priority: number) => void
 }) => JSX.Element = ({ priority, setPriority }) => {
 	return (
-		<FormControl fullWidth>
+		<FormControl className='flex-1'>
 			<InputLabel id='demo-simple-select-label'>priority</InputLabel>
 			<Select
 				labelId='demo-simple-select-label'

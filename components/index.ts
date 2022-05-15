@@ -1,4 +1,3 @@
-export { default as AvatarComponent } from './AuthForm/Avatar'
 export { default as HomeContent } from './Layout/HomeContent'
 export { default as MainContent } from './Layout/MainContent'
 export { default as MainHero } from './Layout/MainHero'

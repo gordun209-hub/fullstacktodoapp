@@ -1,5 +1,6 @@
 import CheckIcon from '@mui/icons-material/Check'
 import { Box, Link, Typography } from '@mui/material'
+import Logo from '../Logo'
 
 const FormWrapper: ({
 	children,
@@ -10,15 +11,7 @@ const FormWrapper: ({
 }) => JSX.Element = ({ children, type }) => {
 	return (
 		<Box className='w-full px-5 lg:px-20 flex flex-col items-center'>
-			<Box className='flex items-center mb-5'>
-				<CheckIcon className=' bg-blue-500 text-white text-6xl rounded-md p-1' />
-				<Typography
-					variant='p'
-					className='text-3xl font-medium ml-3 text-blue-500'
-				>
-					Todo
-				</Typography>
-			</Box>
+			<Logo size='lg' />
 			{children}
 			<Box className='w-full text-right mt-5'>
 				<Link
