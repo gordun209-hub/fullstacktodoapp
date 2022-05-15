@@ -18,7 +18,7 @@ const TodoBox: ({ todo }: { todo: Todo }) => JSX.Element = ({ todo }) => {
 	}
 
 	return (
-		<Box className='flex items-center border-[1px] border-zinc-200 rounded-md p-2'>
+		<Box className='flex justify-between items-center border-[1px] border-zinc-200 rounded-md px-2 py-3'>
 			<Box className='flex items-center' onClick={() => toggleComplete(id)}>
 				<Title completed={completed} id={id} title={title} />
 				<Box className='flex items-center space-x-2'>

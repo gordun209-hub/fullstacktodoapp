@@ -21,7 +21,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
 		const updatedTodo = await prisma.todo.update({
 			where: {
-				id: String(req.query.update)
+				id: String(req.query.id)
 			},
 			data: {
 				title,

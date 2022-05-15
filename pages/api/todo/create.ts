@@ -29,7 +29,10 @@ const handler: (
 		//! will check if the user has the cookie or not
 		const cookie = req.cookies
 
-		const token = jwt.verify(cookie.ACCESS_TOKEN, 'hello') as { id: string }
+		const token = jwt.verify(
+			cookie.ACCESS_TOKEN,
+			process.env.SECRET_KEY as string
+		) as { id: string }
 
 		try {
 			const todo = await prisma.todo.create({

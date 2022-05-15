@@ -6,30 +6,31 @@ const filterTodos: (todos: Todo[], filterType: string) => Todo[] = (
 	filterType
 ) => {
 	todos = todos.filter(todo => {
-		if (filterType === 'completed') {
-			return todo.completed
-		} else if (filterType === 'upcoming') {
-			return (
-				!todo.completed &&
-				todo.deadline &&
-				isWithinInterval(parseISO(todo?.deadline), {
-					start: new Date(Date.now()),
-					end: new Date(Date.now() + 8640000000)
-				})
-			)
-		} else if (filterType === 'today') {
-			return (
-				!todo.completed &&
-				todo.deadline &&
-				isWithinInterval(parseISO(todo?.deadline), {
-					start: new Date(Date.now()),
-					end: new Date(Date.now() + 86400000)
-				})
-			)
-		} else if (filterType === 'inbox') {
-			return !todo.completed
+		switch (filterType) {
+			case 'completed': {
+				return todo.completed
+			}
+			case 'upcoming':
+				return (
+					!todo.completed &&
+					todo.deadline &&
+					isWithinInterval(parseISO(todo?.deadline), {
+						start: new Date(Date.now()),
+						end: new Date(Date.now() + 8640000000)
+					})
+				)
+			case 'today':
+				return (
+					!todo.completed &&
+					todo.deadline &&
+					isWithinInterval(parseISO(todo?.deadline), {
+						start: new Date(Date.now()),
+						end: new Date(Date.now() + 86400000)
+					})
+				)
+			default:
+				return true	
 		}
-		return true
 	})
 	return todos
 }

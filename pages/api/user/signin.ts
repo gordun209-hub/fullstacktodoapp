@@ -3,7 +3,7 @@ import cookie from 'cookie'
 import jwt from 'jsonwebtoken'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import prisma from '../../lib/prisma'
+import prisma from '../../../lib/prisma'
 
 const login: (
 	req: NextApiRequest,
@@ -22,7 +22,7 @@ const login: (
 				email: user.email,
 				time: Date.now()
 			},
-			'hello',
+			process.env.SECRET_KEY as string,
 			{
 				expiresIn: '8h'
 			}

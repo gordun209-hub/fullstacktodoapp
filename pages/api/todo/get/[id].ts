@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '@/lib/prisma'
 
 const getTodo = async (req: NextApiRequest, res: NextApiResponse) => {
-	const id = req.query.getTodo
+	const id = req.query.id
 	try {
 		const todo = await prisma.todo.findUnique({
 			where: {

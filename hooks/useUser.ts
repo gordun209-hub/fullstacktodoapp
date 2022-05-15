@@ -1,7 +1,7 @@
 import type { User } from '@prisma/client'
 import { useQuery } from 'react-query'
 
-import { getUserQuery } from '@/services/api'
+import { getUserQuery } from '@/services/user'
 
 const useUser: () => {
 	user: User | undefined

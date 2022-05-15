@@ -2,18 +2,19 @@ import type { User } from '@prisma/client'
 import type { UseMutateFunction } from 'react-query'
 import { useMutation, useQueryClient } from 'react-query'
 
-import { signupQuery } from '@/services/user'
+import { changePasswordQuery } from '@/services/user'
 
 type ServerError = {
 	error: string
 }
-const useSignupMutation: () => {
+
+const useChangePassword: () => {
 	mutate: UseMutateFunction<
 		User | ServerError,
 		unknown,
 		{
-			email: string
-			password: string
+			oldPassword: string
+			newPassword: string
 		},
 		unknown
 	>
@@ -24,12 +25,15 @@ const useSignupMutation: () => {
 } = () => {
 	const queryClient = useQueryClient()
 
-	const { mutate, data, error, isLoading, isError } = useMutation(signupQuery, {
-		onSuccess: () => {
-			queryClient.invalidateQueries('user')
+	const { mutate, data, error, isLoading, isError } = useMutation(
+		changePasswordQuery,
+		{
+			onSuccess: () => {
+				queryClient.invalidateQueries('user')
+			}
 		}
-	})
+	)
 
 	return { mutate, isLoading, error, data, isError }
 }
-export default useSignupMutation
+export default useChangePassword

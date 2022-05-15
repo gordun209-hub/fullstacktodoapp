@@ -3,7 +3,7 @@ import cookie from 'cookie'
 import jwt from 'jsonwebtoken'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import prisma from '../../lib/prisma'
+import prisma from '../../../lib/prisma'
 
 const signup: (
 	req: NextApiRequest,
@@ -29,7 +29,7 @@ const signup: (
 			id: user.id,
 			time: Date.now()
 		},
-		'hello',
+		process.env.SECRET_KEY as string,
 		{ expiresIn: '8h' }
 	)
 	res.setHeader(
