@@ -7,7 +7,6 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '@/lib/prisma'
 
 //! Fixed and tested
-//! Only signined user can delete hi
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	if (!req.cookies.ACCESS_TOKEN) {
@@ -17,7 +16,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
 		const deletedTodo = await prisma.todo.delete({
 			where: {
-				id: String(req.query.deleteTodo)
+				id: String(req.query.delete)
 			}
 		})
 		res.status(200).json({ message: deletedTodo })
