@@ -7,7 +7,7 @@ const Navbar: () => JSX.Element = () => {
 	const drawerWidth = 240
 
 	const router = useRouter()
-	const { type } = router.query
+	const { type } = router.query as { type: string }
 
 	return (
 		<AppBar
@@ -18,14 +18,14 @@ const Navbar: () => JSX.Element = () => {
 		>
 			<Toolbar data-cy='toolbar'>
 				<Typography
-					className='w-full text-blue-500 flex items-center justify-between'
 					noWrap
+					className='w-full text-blue-500 flex items-center justify-between'
 					data-cy='todos'
 					variant='h6'
 					component='div'
 				>
 					{type ? type.toUpperCase() : 'USER'}
-					<Link href='/user' passHref>
+					<Link passHref href='/user'>
 						<a>
 							<AccountCircleIcon className='text-4xl cursor-pointer' />
 						</a>

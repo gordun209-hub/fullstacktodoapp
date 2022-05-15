@@ -1,9 +1,18 @@
 import { Box, Checkbox, Typography } from '@mui/material'
 
-const Title = ({ completed, id, title }) => {
+const Title: ({
+	completed,
+	id,
+	title
+}: {
+	completed: boolean
+	id: string
+	title: string
+}) => JSX.Element = ({ completed, id, title }) => {
 	return (
 		<Box className='flex items-center'>
 			<Checkbox
+				id={id}
 				className='text-zinc-400'
 				data-cy='todo-checkbox'
 				checked={completed}

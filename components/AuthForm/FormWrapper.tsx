@@ -1,5 +1,5 @@
-import CheckIcon from '@mui/icons-material/Check'
-import { Box, Link, Typography } from '@mui/material'
+import { Box, Link } from '@mui/material'
+
 import Logo from '../Logo'
 
 const FormWrapper: ({

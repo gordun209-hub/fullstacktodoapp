@@ -14,8 +14,8 @@ describe('e2e', () => {
 			cy.url().should('include', '/signin')
 			cy.get('[data-cy="form-submit"]').click()
 
-			cy.get('.mt-1 > :nth-child(2)').should('contain', 'required')
-			cy.get('.mt-1 > :nth-child(4)').should('contain', 'required')
+			cy.get('.mt-10 > :nth-child(2)').should('contain', 'required')
+			cy.get('.mt-10 > :nth-child(4)').should('contain', 'required')
 		})
 	})
 	it('should create a new user', () => {

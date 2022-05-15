@@ -1,7 +1,10 @@
-import { Typography, Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
+
 import convertPriority from '@/utils/convertPriority'
 
-const Priority: () => JSX.Element = ({ priority }) => {
+const Priority: ({ priority }: { priority: number }) => JSX.Element = ({
+	priority
+}) => {
 	return (
 		<Box>
 			<Typography className='text-sm ml-4 text-zinc-400'>

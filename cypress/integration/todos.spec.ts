@@ -20,7 +20,7 @@ describe('e2e test for creating and editing todos', () => {
 		cy.createTodo('test todo3')
 		cy.get('[data-cy="main"]').should('include.text', 'test todo3')
 		cy.get(
-			':nth-child(3) > [data-cy="todo-checkbox"] > .PrivateSwitchBase-input'
+			':nth-child(1) > :nth-child(1) > :nth-child(1) > [data-cy="todo-checkbox"] > .PrivateSwitchBase-input'
 		).click()
 		cy.get('[data-cy="-completed-link"]').click()
 		cy.get('[data-cy="todo-title"]').should('be.visible')

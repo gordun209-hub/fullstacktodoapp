@@ -9,7 +9,7 @@ describe('HomeContent', () => {
 	test('Button gets user href when there is a user', async () => {
 		render(<HomeContent />)
 
-		expect(screen.getByText('Todo App')).toBeInTheDocument()
+		expect(screen.getByText('Todo')).toBeInTheDocument()
 		await waitFor(() => {
 			const href = screen
 				.getByRole('link', { name: /get started/i })

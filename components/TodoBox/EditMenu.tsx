@@ -7,7 +7,7 @@ import React, { useState } from 'react'
 
 import { useDeleteTodo } from '@/hooks/index'
 
-const EditMenu: () => JSX.Element = ({ id }) => {
+const EditMenu: ({ id }: { id: string }) => JSX.Element = ({ id }) => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 	const open = Boolean(anchorEl)
 
@@ -29,6 +29,7 @@ const EditMenu: () => JSX.Element = ({ id }) => {
 	return (
 		<Box>
 			<MenuOpenIcon
+				component={'address'}
 				className='ml-3 cursor-pointer text-blue-400 text-[1.08rem]'
 				id='basic-button'
 				aria-controls={open ? 'basic-menu' : undefined}
@@ -51,7 +52,7 @@ const EditMenu: () => JSX.Element = ({ id }) => {
 					<Typography className='ml-1 text-sm text-zinc-600'>Delete</Typography>
 				</MenuItem>
 
-				<Link href={`/user/todos/${id}`}>
+				<Link passHref href={`/user/todos/${id}`}>
 					<MenuItem onClose={handleClose}>
 						<EditIcon className='text-[1.15rem] text-zinc-600 cursor-pointer' />
 						<Typography className='ml-1 text-sm text-zinc-600'>Edit</Typography>

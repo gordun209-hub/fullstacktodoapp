@@ -1,4 +1,5 @@
 import { Box } from '@mui/system'
+import type { Todo } from '@prisma/client'
 
 import { useToggleComplete } from '@/hooks/index'
 
@@ -7,7 +8,7 @@ import EditMenu from './EditMenu'
 import Priority from './Priority'
 import Title from './Title'
 
-const TodoBox: ({ todo }, { todo: Object }) => JSX.Element = ({ todo }) => {
+const TodoBox: ({ todo }: { todo: Todo }) => JSX.Element = ({ todo }) => {
 	const { id, completed, title, priority, deadline } = todo
 
 	const { mutate: completeTodo } = useToggleComplete()

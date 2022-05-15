@@ -1,4 +1,4 @@
-import { Box, Divider, Drawer, Toolbar } from '@mui/material'
+import { Divider, Drawer, Toolbar } from '@mui/material'
 
 import Logo from '../Logo'
 import LogOutButton from '../LogOutButton'
