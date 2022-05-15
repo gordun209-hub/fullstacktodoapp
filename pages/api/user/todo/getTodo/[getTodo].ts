@@ -13,7 +13,7 @@ const getTodo = async (req: NextApiRequest, res: NextApiResponse) => {
 		})
 		res.status(200).json(todo)
 	} catch (error) {
-		res.status(400).json({ message: 'cant delete todo', error })
+		res.status(400).json({ error })
 	}
 }
 export default getTodo

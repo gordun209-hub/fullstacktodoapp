@@ -29,20 +29,15 @@ const handler: (
 		//! will check if the user has the cookie or not
 		const cookie = req.cookies
 
-		if (!req.cookies.ACCESS_TOKEN) {
-			return res.status(500).json({ message: 'cookie not found' })
-		}
-
 		const token = jwt.verify(cookie.ACCESS_TOKEN, 'hello') as { id: string }
 
-		// prisma creates a new todo in the database
 		try {
 			const todo = await prisma.todo.create({
 				data: {
 					title,
 					priority,
 					completed,
-					updatedAt: new Date(),
+
 					deadline,
 					user: {
 						connect: {
@@ -51,18 +46,9 @@ const handler: (
 					}
 				}
 			})
-			//! If the user does not provide required information in input
-			//! The message will be thrown
-			todo.title === '' ||
-			todo.priority < 0 ||
-			todo.completed === undefined ||
-			null
-				? res
-						.status(201)
-						.json({ message: 'The user has no todo or provided invalid input' })
-				: res.status(200).json(todo)
-		} catch (error) {
-			res.status(400).json({ message: error })
+			res.json(todo)
+		} catch (e) {
+			res.status(400).json({ error: e })
 		}
 	}
 }
