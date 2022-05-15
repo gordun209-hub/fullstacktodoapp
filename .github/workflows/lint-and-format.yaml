@@ -1,7 +1,5 @@
 name: Lint And Format
-on:
-  push:
-    branches: [master, develop, feature/test]
+on: [push, pull_request]
 
 jobs:
   simple-lint-and-refactor:

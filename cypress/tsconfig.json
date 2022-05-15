@@ -1,16 +1,11 @@
 {
 	"compilerOptions": {
 		"target": "ESNext",
-		"lib": ["es5", "dom", "dom.iterable", "esnext"],
+		"lib": ["es5", "dom"],
 
 		"allowJs": true,
 		"types": ["cypress", "@testing-library/cypress", "node"],
 		"moduleResolution": "Node"
 	},
-	"include": [
-		"cypress/**/*.ts",
-		"**/*.ts",
-		"**/*.tsx",
-		"cypress/plugins/index.ts"
-	]
+	"include": ["cypress/**/*.ts", "**/*.ts", "**/*.tsx"]
 }
