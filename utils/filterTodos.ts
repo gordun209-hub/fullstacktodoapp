@@ -26,6 +26,8 @@ const filterTodos: (todos: Todo[], filterType: string) => Todo[] = (
 					end: new Date(Date.now() + 86400000)
 				})
 			)
+		} else if (filterType === 'inbox') {
+			return !todo.completed
 		}
 		return true
 	})
