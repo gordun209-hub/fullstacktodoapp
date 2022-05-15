@@ -14,7 +14,7 @@ const createTodoQuery: ({
 	completed: boolean
 	deadline?: Date
 }) => Promise<Todo> = async ({ priority, title, completed, deadline }) => {
-	const res = await axios.post(`${baseUrl}/api/user/todo/makeTodo`, {
+	const res = await axios.post(`${baseUrl}/api/user/todo/create`, {
 		priority,
 		title,
 		completed,
