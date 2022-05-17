@@ -14,7 +14,7 @@ const createTodoQuery: ({
 	completed: boolean
 	deadline?: Date
 }) => Promise<Todo> = async ({ priority, title, completed, deadline }) => {
-	const res = await axios.post(`${baseUrl}/api/user/todo/create`, {
+	const res = await axios.post(`${baseUrl}/api/todo/create`, {
 		priority,
 		title,
 		completed,
@@ -24,14 +24,14 @@ const createTodoQuery: ({
 	return res.data
 }
 const getTodosQuery: () => Promise<Todo[]> = async () => {
-	const res = await axios.get(`${baseUrl}/api/todos`)
+	const res = await axios.get(`${baseUrl}/api/todo/get`)
 	return res.data
 }
 
 const completeTodoQuery: ({ id }: { id: string }) => Promise<Todo> = async ({
 	id
 }) => {
-	const res = await axios.post(`${baseUrl}/api/user/todo/completeTodo/${id}`, {
+	const res = await axios.post(`${baseUrl}/api/todo/complete/${id}`, {
 		id
 	})
 	return res.data
@@ -40,13 +40,13 @@ const completeTodoQuery: ({ id }: { id: string }) => Promise<Todo> = async ({
 const deleteTodoQuery: ({ id }: { id: string }) => Promise<Todo> = async ({
 	id
 }) => {
-	const res = await axios.post(`${baseUrl}/api/user/todo/deleteTodo/${id}`)
+	const res = await axios.post(`${baseUrl}/api/todo/delete/${id}`)
 	return res.data
 }
 const getTodoQuery: ({ id }: { id: string }) => Promise<Todo> = async ({
 	id
 }) => {
-	const res = await axios.get(`${baseUrl}/api/user/todo/getTodo/${id}`)
+	const res = await axios.get(`${baseUrl}/api/todo/get/${id}`)
 	return res.data
 }
 
@@ -63,7 +63,7 @@ const editTodoQuery: ({
 	completed: boolean
 	deadline: Date
 }) => Promise<Todo> = async ({ id, title, completed, deadline, priority }) => {
-	const res = await axios.post(`${baseUrl}/api/user/todo/editTodo/editTodo`, {
+	const res = await axios.post(`${baseUrl}/api/todo/edit/${id}`, {
 		id,
 		title,
 		completed,

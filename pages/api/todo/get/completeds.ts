@@ -9,10 +9,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const cookie = req.cookies
 
 	if (!req.cookies.ACCESS_TOKEN) {
-		return res.status(500).json({ message: 'cookie not found' })
+		return res.status(500).json({ message: 'Cookie not found' })
 	}
 
-	const user: any = jwt.verify(cookie.ACCESS_TOKEN, 'hello')
+	const user: any = jwt.verify(
+		cookie.ACCESS_TOKEN,
+		process.env.SECRET_KEY as string
+	)
 
 	//! Prisma looks for a user whose todo is completed using userId
 	//! Gives info below
@@ -35,6 +38,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			? res.status(201).json({ message: 'The user has no todo' })
 			: res.status(200).json(completedTodo)
 	} catch (error) {
-		res.status(404).json({ message: "can't retrive completed todos", error })
+		res.status(404).json({ message: "Can't retrive completed todos", error })
 	}
 }

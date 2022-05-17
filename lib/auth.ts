@@ -13,7 +13,9 @@ export const validateRoute = (
 		if (token) {
 			let user: User | null
 			try {
-				const { id } = jwt.verify(token, 'hello') as { id: string }
+				const { id } = jwt.verify(token, process.env.SECRET_KEY as string) as {
+					id: string
+				}
 				user = await prisma.user.findUnique({
 					where: { id }
 				})
@@ -38,6 +40,6 @@ export const validateRoute = (
 export const validateToken: (token: string) => string | jwt.JwtPayload = (
 	token: string
 ) => {
-	const user = jwt.verify(token, 'hello')
+	const user = jwt.verify(token, process.env.SECRET_KEY as string)
 	return user
 }

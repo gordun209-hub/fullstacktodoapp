@@ -39,12 +39,6 @@ const links = [
 		icon: <EventAvailableOutlinedIcon />,
 		query: 'completed',
 		datacy: 'completed-link'
-	},
-	{
-		name: 'Dashboard',
-		icon: <SsidChartIcon />,
-		link: 'dashboard',
-		datacy: 'dashboard-link'
 	}
 ]
 

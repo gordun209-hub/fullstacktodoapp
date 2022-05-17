@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import EditIcon from '@mui/icons-material/Edit'
-import MenuOpenIcon from '@mui/icons-material/MenuOpen'
+import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { Box, Menu, MenuItem, Typography } from '@mui/material'
 import Link from 'next/link'
 // @ts-nocheck
@@ -31,8 +31,8 @@ const EditMenu: ({ id }: { id: string }) => JSX.Element = ({ id }) => {
 	return (
 		<Box>
 			{/* @ts-ignore */}
-			<MenuOpenIcon
-				className='ml-3 cursor-pointer text-blue-400 text-[1.08rem]'
+			<MoreVertIcon
+				className='ml-3 cursor-pointer'
 				id='basic-button'
 				aria-controls={open ? 'basic-menu' : undefined}
 				aria-haspopup='true'

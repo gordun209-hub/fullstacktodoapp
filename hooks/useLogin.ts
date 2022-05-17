@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import type { UseMutateFunction } from 'react-query'
 import { useMutation, useQueryClient } from 'react-query'
 
-import { loginQuery } from '@/services/api'
+import { loginQuery } from '@/services/user'
 
 const useLoginMutation: () => {
 	mutate: UseMutateFunction<

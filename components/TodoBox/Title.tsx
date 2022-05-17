@@ -16,6 +16,7 @@ const Title: ({
 				className='text-zinc-400'
 				data-cy='todo-checkbox'
 				checked={completed}
+				size='small'
 			/>
 			<Typography
 				data-cy='todo-title'
